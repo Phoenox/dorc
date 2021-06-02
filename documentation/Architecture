@@ -1,1 +1,115 @@
-<mxfile host="app.diagrams.net" modified="2021-06-02T19:42:03.652Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" version="14.7.4" etag="Jh-ygD15LhzT-BiEhZOp" type="github"><diagram id="SGOHzId4b8nCIw8Ii_hk">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-06-02T20:06:30.619Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" etag="pVjv7voSNhVpZec1eRBL" version="14.7.4" type="github">
+  <diagram id="SGOHzId4b8nCIw8Ii_hk" name="Page-1">
+    <mxGraphModel dx="1038" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-6" value="Modules (Plugins)" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="40" width="310" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-7" value="Character Manager" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="135" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-8" value="Session Manager" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="60" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-4" value="Hub" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="300" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-1" value="Desktop&lt;br&gt;(Windows, Linux, Mac)" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="60" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-2" value="Mobile" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="130" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-3" value="Web" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="200" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-9" value="Dice Roller" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="340" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-10" value="Knowledge Base" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="270" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-11" value="Virtual Table" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="200" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-12" value="Systems&lt;br&gt;(Plugins)" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="320" width="300" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-13" value="FATE Core" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="410" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-14" value="DND 5E SRD" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="340" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-15" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;jumpStyle=none;verticalAlign=middle;align=right;" edge="1" parent="1" source="sa1Bu_KtNwjXzWenEN_l-8" target="sa1Bu_KtNwjXzWenEN_l-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="330" y="310" as="sourcePoint" />
+            <mxPoint x="490" y="310" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="85" />
+              <mxPoint x="510" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-18" value="" style="endArrow=open;endSize=12;dashed=1;horizontal=1;verticalAlign=top;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sa1Bu_KtNwjXzWenEN_l-8" target="sa1Bu_KtNwjXzWenEN_l-11">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="470" y="260" as="sourcePoint" />
+            <mxPoint x="620" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="85" />
+              <mxPoint x="510" y="225" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-21" value="" style="endArrow=open;endSize=12;dashed=1;horizontal=1;verticalAlign=top;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sa1Bu_KtNwjXzWenEN_l-8" target="sa1Bu_KtNwjXzWenEN_l-10">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="500" y="90" as="sourcePoint" />
+            <mxPoint x="500" y="230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="85" />
+              <mxPoint x="510" y="295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-22" value="" style="endArrow=open;endSize=12;dashed=1;horizontal=1;verticalAlign=top;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sa1Bu_KtNwjXzWenEN_l-8" target="sa1Bu_KtNwjXzWenEN_l-9">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="550" y="95" as="sourcePoint" />
+            <mxPoint x="550" y="305" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="85" />
+              <mxPoint x="510" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-23" value="BattleTech" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="510" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-24" value="ShadowCore" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="510" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-25" value="" style="endArrow=block;endSize=16;endFill=0;html=1;align=right;verticalAlign=middle;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;rounded=1;" edge="1" parent="1" source="sa1Bu_KtNwjXzWenEN_l-23" target="sa1Bu_KtNwjXzWenEN_l-13">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="100" y="570" as="sourcePoint" />
+            <mxPoint x="260" y="570" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="115" y="490" />
+              <mxPoint x="190" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sa1Bu_KtNwjXzWenEN_l-26" value="" style="endArrow=block;endSize=16;endFill=0;html=1;align=right;verticalAlign=middle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;rounded=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="sa1Bu_KtNwjXzWenEN_l-24" target="sa1Bu_KtNwjXzWenEN_l-13">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="125" y="520" as="sourcePoint" />
+            <mxPoint x="220" y="470" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="265" y="490" />
+              <mxPoint x="190" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
