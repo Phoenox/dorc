@@ -19,9 +19,11 @@ let asWord number =
      | i -> i.ToString()
 
 let roll count sides =
-    seq [ for _ in 1 .. count ->
-          printf $"rolled a {(System.Random().Next sides) + 1} on a {asWord sides}-sided die\n"
-    ]
+    [1 .. count] |> 
+        List.map 
+            (fun _ -> 
+                printf $"rolled a {(System.Random().Next sides) + 1} on a {asWord sides}-sided die\n"
+            )
 
 [<EntryPoint>]
 let main argv =
