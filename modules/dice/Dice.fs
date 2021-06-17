@@ -18,12 +18,14 @@ let asWord number =
      | 12 -> "twelve"
      | i -> i.ToString()
 
+let printResult result sides =
+    printf $"rolled a {result} on a {asWord sides}-sided die\n"
+
+let rand n =
+    (System.Random().Next n)
+
 let roll count sides =
-    [1 .. count] |> 
-        List.map 
-            (fun _ -> 
-                printf $"rolled a {(System.Random().Next sides) + 1} on a {asWord sides}-sided die\n"
-            )
+    [1 .. count] |>  List.map (fun _ -> printResult ((rand sides) + 1) sides)
 
 [<EntryPoint>]
 let main argv =
