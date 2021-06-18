@@ -1,4 +1,4 @@
-// Learn more about F# at http://docs.microsoft.com/dotnet/fsharp
+module dice
 
 open System
 
@@ -24,13 +24,16 @@ let printResult result sides =
 let rand n =
     (System.Random().Next n)
 
-let roll count sides =
-    [1 .. count] |>  List.map (fun _ -> printResult ((rand sides) + 1) sides)
+let roll sides =
+    ((rand sides) + 1)
+
+let printRolls count sides =
+    [1 .. count] |>  List.map (fun _ -> printResult (roll sides) sides)
 
 [<EntryPoint>]
 let main argv =
     ignore (
-        roll (int argv.[0]) (int argv.[1])
+        printRolls (int argv.[0]) (int argv.[1])
     )
     0
     
