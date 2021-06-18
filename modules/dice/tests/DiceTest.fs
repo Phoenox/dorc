@@ -9,7 +9,6 @@ let Setup () =
 [<Test>]
 let test_diceRolling_staysInBounds () =
     let sides = 6
-    // power operator only works with floats, but that's not a problem here
     let sampleCount = 1000
     let samples = [1 .. sampleCount] |> List.map (fun _ -> dice.roll sides)
     let lowerBound = 1

@@ -1,7 +1,5 @@
 module dice
 
-open System
-
 let asWord number =
     match number with
      | 1 -> "one"
