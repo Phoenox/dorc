@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="DiceTest.fs" />
+    <Compile Include="CharactersTest.fs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dice.fsproj" />
+    <ProjectReference Include="..\characters\characters.fsproj" />
   </ItemGroup>
 
 </Project>
