@@ -139,7 +139,7 @@ let update remote message model =
 /// Connects the routing system to the Elmish application.
 let router = Router.infer SetPage (fun model -> model.page)
 
-type Main = Template<"wwwroot/index.html">
+type Main = Template<"wwwroot/main.html">
 
 let homePage model dispatch =
     Main.Home().Elt()

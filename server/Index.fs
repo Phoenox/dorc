@@ -13,6 +13,8 @@ let page = doctypeHtml [] [
         ``base`` [attr.href "/"]
         link [attr.rel "stylesheet"; attr.href "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"]
         link [attr.rel "stylesheet"; attr.href "css/index.css"]
+        link [attr.rel "manifest"; attr.href "manifest.json"]
+        link [attr.rel "apple-touch-icon"; attr.sizes "512x512"; attr.href "icon-512.png"]
     ]
     body [] [
         nav [attr.classes ["navbar"; "is-dark"]; "role" => "navigation"; attr.aria "label" "main navigation"] [
@@ -25,5 +27,6 @@ let page = doctypeHtml [] [
         ]
         div [attr.id "main"] [rootComp<Client.Main.MyApp>]
         boleroScript
+        script [] [RawHtml "navigator.serviceWorker.register('service-worker.js');"]
     ]
 ]

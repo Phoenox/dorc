@@ -3,6 +3,8 @@ name: Build, Test and Deploy
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -19,15 +21,4 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Create release
-      run: dotnet publish client/client.fsproj -c Release -o release --nologo
-    - name: Change base-tag in index.html from / to dorc
-      run: sed -i 's/<base href="\/" \/>/<base href="\/dorc\/" \/>/g' release/wwwroot/index.html
-    - name: Add .nojekyll file
-      run: touch release/wwwroot/.nojekyll
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.7.1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: release/wwwroot
+
