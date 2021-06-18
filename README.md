@@ -14,3 +14,9 @@ For creating a new module `foo` with corresponding tests:
 
 For adding the tests to the module test solution (necessary for CI to execute them):
   6. cd to `modules` and add reference from the solution to the new test module: `dotnet sln add reference foo/test/tests.csproj`
+
+
+# Might Be Handy
+
+https://dungpa.github.io/fsharp-cheatsheet/
+
