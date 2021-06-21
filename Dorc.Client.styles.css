@@ -1,3 +1,9 @@
+/* /Pages/Index.razor.rz.scp.css */
+.logo[b-uj84nh6mjy] {
+    float: left;
+    height: 8rem;
+    padding-right: 2rem;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-gpf6x1sd3y] {
     position: relative;
@@ -10,7 +16,7 @@
 }
 
 .sidebar[b-gpf6x1sd3y] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, rgb(11, 138, 0) 0%, #064b00 70%);
 }
 
 .top-row[b-gpf6x1sd3y] {
@@ -71,6 +77,7 @@
 }
 /* /Shared/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-vn5qh0jrjp] {
+    margin-top: -1rem;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -88,6 +95,15 @@
     font-size: 1.1rem;
     vertical-align: text-top;
     top: -2px;
+}
+
+.md[b-vn5qh0jrjp] {
+    width: 2rem;
+    font-size: 1.5rem;
+    vertical-align: text-top;
+    margin-top: -2px;
+    margin-left: -5px;
+    margin-right: 5px;
 }
 
 .nav-item[b-vn5qh0jrjp] {
@@ -131,4 +147,15 @@
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+
+    .lower-menu[b-vn5qh0jrjp] {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+.logo[b-vn5qh0jrjp] {
+    height: 2.5rem;
 }
