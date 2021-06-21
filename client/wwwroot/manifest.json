@@ -1,13 +1,13 @@
 {
-  "name": "Dorc.Client",
-  "short_name": "Dorc.Client",
+  "name": "D'Orc",
+  "short_name": "Dorc",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#03173d",
+  "theme_color": "#064b00",
   "icons": [
     {
-      "src": "icon-512.png",
+      "src": "images/logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }

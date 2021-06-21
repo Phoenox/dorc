@@ -1,4 +1,5 @@
 .navbar-toggler {
+    margin-top: -1rem;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -16,6 +17,15 @@
     font-size: 1.1rem;
     vertical-align: text-top;
     top: -2px;
+}
+
+.md {
+    width: 2rem;
+    font-size: 1.5rem;
+    vertical-align: text-top;
+    margin-top: -2px;
+    margin-left: -5px;
+    margin-right: 5px;
 }
 
 .nav-item {
@@ -59,4 +69,15 @@
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+
+    .lower-menu {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+.logo {
+    height: 2.5rem;
 }

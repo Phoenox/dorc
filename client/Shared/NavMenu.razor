@@ -1,5 +1,8 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Dorc.Client</a>
+﻿<div class="top-row navbar navbar-dark">
+    <p>
+        <img class="logo" src="images/logo.png"/>
+        <a class="pl-2 navbar-brand" href="">D'Orc</a>
+    </p>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,14 +15,23 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </li>
+    </ul>
+    <ul class="nav flex-column">
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="characters">
+                <span class="oi oi-people" aria-hidden="true"></span> Characters
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <NavLink class="nav-link" href="dice">
+                <span class="md material-icons" aria-hidden="true">casino</span> Dice Roller
+            </NavLink>
+        </li>
+    </ul>
+    <ul class="nav flex-column lower-menu">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="about">
+                <span class="oi oi-question-mark" aria-hidden="true"></span> About
             </NavLink>
         </li>
     </ul>
