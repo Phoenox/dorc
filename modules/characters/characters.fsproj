@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Compile Include="Characters.fs" />
-    <Compile Include="View.fs" />
   </ItemGroup>
 
   <ItemGroup>
