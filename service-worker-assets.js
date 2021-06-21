@@ -93,7 +93,7 @@
       "url": "images\/logo.png"
     },
     {
-      "hash": "sha256-WXn6gvrGe+5PmgFEfwu/0XItNYz21D6b0KkuzwCZwSQ=",
+      "hash": "sha256-55L6GYLegQtyGV/2MUL12tikbeYdW0tOmPQmIDxx4uM=",
       "url": "index.html"
     },
     {
@@ -273,5 +273,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "jkYRwhvL"
+  "version": "2EB1eJee"
 };
