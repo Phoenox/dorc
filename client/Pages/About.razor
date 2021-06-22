@@ -1,21 +1,26 @@
 @page "/about"
 
-<h1>About D'Orc</h1>
+<MudContainer Class="px-0 pb-4">
+    <MudText Typo="Typo.h4">About D'Orc</MudText>
 
-<p>
-    D'Orc is a free and open-source web application that provides useful tools for pen-and-paper roleplaying,
-    both online and offline.<br>
-    Check out the GitHub project page here: <a href="https://github.com/Phoenox/dorc">github.com/Phoenox/dorc</a>
-</p>
+    <MudText Typo="Typo.body1">
+        D'Orc is a free and open-source web application that provides useful tools for pen-and-paper roleplaying,
+        both online and offline.<br>
+        Check out the GitHub project page here: <a href="https://github.com/Phoenox/dorc">github.com/Phoenox/dorc</a>
+    </MudText>
+</MudContainer>
 
-<h2>Third party projects</h2>
+<MudContainer Class="px-0 py-4">
+    <MudText Typo="Typo.h6">Third party projects</MudText>
 
-D'Orc would not have been possible without the following projects:
-
-<ul>
-    <li><span class="project-name">Blazor:</span> <a href="https://blazor.net">blazor.net</a></li>
-    <li><span class="project-name">Bootstrap:</span> <a href="https://getbootstrap.com">getbootstrap.com</a></li>
-    <li><span class="project-name">F#</span> <a href="https://fsharp.org">fsharp.org</a></li>
-    <li><span class="project-name">Material Design Icons:</span> <a href="https://fonts.google.com/icons">fonts.google.com/icons</a></li>
-    <li><span class="project-name">Open Iconic:</span> <a href="https://useiconic.com/open">useiconic.com/open</a></li>
-</ul>
+    <MudText Typo="Typo.body1">
+        D'Orc would not have been possible without the following projects:
+        <MudList>
+            <MudListItem><MudLink Href="https://blazor.net">Blazor</MudLink></MudListItem>
+            <MudListItem><MudLink Href="https://getbootstrap.com">Bootstrap</MudLink></MudListItem>
+            <MudListItem><MudLink Href="https:/fsharp.org">F#</MudLink></MudListItem>
+            <MudListItem><MudLink Href="https://fonts.google.com/icons">Material Design Icons</MudLink></MudListItem>
+            <MudListItem><MudLink Href="https://useiconic.com/open">Open Iconic</MudLink></MudListItem>
+        </MudList>
+    </MudText>
+</MudContainer>

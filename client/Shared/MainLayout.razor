@@ -1,13 +1,37 @@
 @inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="content px-4">
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleDrawer())" />
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="isDrawerOpen" Elevation="2">
+        <MudDrawerHeader>
+            <img class="logo" src="images/logo.png"/>
+            <MudText Typo="Typo.h5" Class="mt-1 ml-4">D'Orc</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu Class="mud-width-full">
+            <MudNavLink Href="" Icon="@Icons.Filled.Home" Match="NavLinkMatch.All">Home</MudNavLink>
+            <MudNavGroup Title="Modules" Icon="@Icons.Filled.ViewModule" Expanded="true">
+                <MudNavLink Href="characters" Icon="@Icons.Filled.Groups">Characters</MudNavLink>
+                <MudNavLink Href="dice" Icon="@Icons.Filled.Casino">Dice Roller</MudNavLink>
+            </MudNavGroup>
+            <MudNavLink Href="about" Icon="@Icons.Filled.Info">About</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer Class="mx-4 my-8">
             @Body
-        </div>
-    </div>
-</div>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool isDrawerOpen = true;
+
+    void ToggleDrawer()
+    {
+        isDrawerOpen = !isDrawerOpen;
+    }
+}
