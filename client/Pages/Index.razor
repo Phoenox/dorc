@@ -11,11 +11,21 @@
 
 <MudText Typo="Typo.body1">
     <p>
-        For your first visit, why don't we <button class="rollbutton" @onclick="RollForBoth">roll some dice</button>?
+        For your first visit, why don't we 
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" class="rollbutton" @onclick="RollForBoth">
+            roll some dice
+        </MudButton>?
     </p>
     <p>
-        Our Roll: @ourRoll <br>
-        Jean-Pierre's Roll: @jeanPierresRoll
+        <MudGrid>
+            <MudItem xs="3">
+                <MudField Label="We Rolled" Variant="Variant.Outlined">@ourRoll</MudField> <br>
+            </MudItem>
+            <MudItem xs="3">
+                <MudField Label="Jean-Pierre Rolled" Variant="Variant.Outlined">@jeanPierresRoll</MudField>
+            </MudItem>
+        </MudGrid>
+        
     </p>
     
 </MudText>

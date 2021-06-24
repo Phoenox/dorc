@@ -2,14 +2,11 @@
 
 <MudText Typo="Typo.body1">
     <p>
-        Let's roll!
-    </p>
-    <p>
-        Our Roll: @rolled <br>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDie">Let's Roll!</MudButton>
+        <MudField Label="We Rolled" Variant="Variant.Outlined">@rolled</MudField>
     </p>
     
 </MudText>
-<button class="btn btn-primary" @onclick="RollDie">Roll!</button>
 
 
 @code
