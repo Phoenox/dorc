@@ -1,6 +1,7 @@
 module diceTests
 
 open NUnit.Framework
+open DiceSharp
 
 [<SetUp>]
 let Setup () =
@@ -10,7 +11,7 @@ let Setup () =
 let test_diceRolling_staysInBounds () =
     let sides = 6
     let sampleCount = 1000
-    let samples = [1 .. sampleCount] |> List.map (fun _ -> dice.roll sides)
+    let samples = [1 .. sampleCount] |> List.map (fun _ -> Dice.roll sides)
     let lowerBound = 1
     let upperBound = sides
 
