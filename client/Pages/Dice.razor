@@ -9,7 +9,7 @@
     </p>
     
 </MudText>
-<button @onClick="RollDie">Roll!</button>
+<button class="btn btn-primary" @onclick="RollDie">Roll!</button>
 
 
 @code
@@ -19,6 +19,12 @@
 
     private void RollDie()
     {
+        Console.WriteLine(
+            "Rolling!"
+        );
         rolled = roller.RollDie();
+        Console.WriteLine(
+            $"Rolled a {rolled}!"
+        );
     }
 }
