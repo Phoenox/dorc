@@ -8,3 +8,31 @@
     Jean-Pierre D'Orc bids you welcome in his humble abode.<br>
     As his honored guest, he will gladly assist you in all your tabletop roleplaying needs.
 </MudText>
+
+<MudText Typo="Typo.body1">
+    <p>
+        For your first visit, why don't we roll some dice?
+    </p>
+    <p>
+        Our Roll: @ourRoll <br>
+        Jean-Pierre's Roll: @jeanPierresRoll
+    </p>
+    
+</MudText>
+<button @onClick="RollForBoth">Roll some dice!</button>
+
+
+@code
+{
+    private int? ourRoll = null;
+    private int? jeanPierresRoll = null;
+    private DiceRoller roller = new DiceRoller();
+
+    private void RollForBoth()
+    {
+        ourRoll = RollDie();
+        jeanPierresRoll = RollDie();
+    }
+
+    private int RollDie() => roller.RollDie();
+}

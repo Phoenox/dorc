@@ -1,0 +1,24 @@
+@page "/dice"
+
+<MudText Typo="Typo.body1">
+    <p>
+        Let's roll!
+    </p>
+    <p>
+        Our Roll: @rolled <br>
+    </p>
+    
+</MudText>
+<button @onClick="RollDie">Roll!</button>
+
+
+@code
+{
+    private int? rolled = null;
+    private DiceRoller roller = new DiceRoller();
+
+    private void RollDie()
+    {
+        rolled = roller.RollDie();
+    }
+}
