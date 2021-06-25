@@ -4,23 +4,33 @@
     
     <p>
         <MudGrid Spacing=2>
-            <MudItem xs=4>
+            <MudItem xs=3>
                 <MudTextField @bind-Value="number" Label="Number of Dice" Variant="Variant.Outlined" />
             </MudItem>
-            <MudItem xs=4>
+            <MudItem xs=3>
                 <MudTextField @bind-Value="sides" Label="Sides per Die" Variant="Variant.Outlined" />
             </MudItem>
-            <MudItem xs=4>
+            <MudItem xs=3>
                 <MudTextField @bind-Value="offset" Label="Bonus to Result" Variant="Variant.Outlined" />
             </MudItem>
+            <MudItem xs=3>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDice">Let's Roll!</MudButton>
+            </MudItem>
         </MudGrid>
-        <p>
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDice">Let's Roll!</MudButton>
-        </p>
-        <p>
-            Or are you playing Fate or something similar?
-        </p>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollFudge">Let's Roll some Fudge Dice instead!</MudButton>
+        
+        <MudGrid Spacing=2>
+            <MudItem xs=9>
+                <MudField Variant="Variant.Outlined">
+                    Playing Fate or something similar?
+                </MudField>
+            </MudItem>
+            <MudItem xs=3>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollFudge">
+                    Let's Fudge!
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+
         <MudGrid Spacing=2>
             <MudItem xs=4>
                 <MudField Label="End Result" Variant="Variant.Outlined">@result</MudField>
