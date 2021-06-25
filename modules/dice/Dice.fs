@@ -21,11 +21,16 @@ module Dice =
     let printResult result sides =
         printf $"rolled a {result} on a {asWord sides}-sided die\n"
 
-    let rand n =
+    // Returns a random integer between 0 (inclusive) and n-1 (inclusive)
+    let randInt n =
         (System.Random().Next n)
 
     let roll sides =
-        ((rand sides) + 1)
+        ((randInt sides) + 1)
+    
+    // We want a uniformally distributed result between -1 and +1
+    let rollFudge =
+        [1 .. 4] |> List.map (fun _ -> (randInt 2) - 1 )
 
     let rollMultiple count sides =
         [1 .. count] |> List.map (fun _ -> roll sides)
