@@ -29,8 +29,8 @@ module Dice =
         ((randInt sides) + 1)
     
     // We want a uniformally distributed result between -1 and +1
-    let rollFudge =
-        [1 .. 4] |> List.map (fun _ -> (randInt 2) - 1 )
+    let rollFudge () =
+        [1 .. 4] |> List.map (fun _ -> (randInt 3) - 1 )
 
     let rollMultiple count sides =
         [1 .. count] |> List.map (fun _ -> roll sides)

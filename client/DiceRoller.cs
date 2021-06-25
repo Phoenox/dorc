@@ -14,6 +14,8 @@ namespace Dorc.Client
         {
             return Dice.rollMultiple(count, sides);
         }
+
+        public IEnumerable<int> RollFudge() => Dice.rollFudge();
     }
 
 }

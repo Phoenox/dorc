@@ -14,7 +14,13 @@
                 <MudTextField @bind-Value="offset" Label="Bonus to Result" Variant="Variant.Outlined" />
             </MudItem>
         </MudGrid>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDie">Let's Roll!</MudButton>
+        <p>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDice">Let's Roll!</MudButton>
+        </p>
+        <p>
+            Or are you playing Fate or something similar?
+        </p>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollFudge">Let's Roll some Fudge Dice instead!</MudButton>
         <MudGrid Spacing=2>
             <MudItem xs=4>
                 <MudField Label="End Result" Variant="Variant.Outlined">@result</MudField>
@@ -39,13 +45,22 @@
 
     private DiceRoller roller = new DiceRoller();
 
-    private void RollDie()
+    private void RollDice()
     {
-        Console.WriteLine(
-            "Rolling!"
-        );
         rolled = roller.RollDice(number, sides);
         result = rolled.Sum() + offset;
+        UpdateRepresentation();
+    }
+
+    private void RollFudge()
+    {
+        rolled = roller.RollFudge();
+        result = rolled.Sum() + offset;
+        UpdateRepresentation();
+    }
+
+    private void UpdateRepresentation()
+    {
         rolledRepresentation = rolled
             .Skip(1)
             .Select(i => i.ToString())
