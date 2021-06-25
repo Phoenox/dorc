@@ -27,6 +27,9 @@ module Dice =
     let roll sides =
         ((rand sides) + 1)
 
+    let rollMultiple count sides =
+        [1 .. count] |> List.map (fun _ -> roll sides)
+
     let printRolls count sides =
         [1 .. count] |>  List.map (fun _ -> printResult (roll sides) sides)
 

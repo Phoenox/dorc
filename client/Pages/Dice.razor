@@ -1,9 +1,28 @@
 @page "/dice"
 
 <MudText Typo="Typo.body1">
+    
     <p>
+        <MudGrid Spacing=2>
+            <MudItem xs=4>
+                <MudTextField @bind-Value="number" Label="Number of Dice" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs=4>
+                <MudTextField @bind-Value="sides" Label="Sides per Die" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs=4>
+                <MudTextField @bind-Value="offset" Label="Bonus to Result" Variant="Variant.Outlined" />
+            </MudItem>
+        </MudGrid>
         <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDie">Let's Roll!</MudButton>
-        <MudField Label="We Rolled" Variant="Variant.Outlined">@rolled</MudField>
+        <MudGrid Spacing=2>
+            <MudItem xs=4>
+                <MudField Label="End Result" Variant="Variant.Outlined">@result</MudField>
+            </MudItem>
+            <MudItem xs=8>
+                <MudField Label="Dice Rolls" Variant="Variant.Outlined">@rolledRepresentation</MudField>
+            </MudItem>
+        </MudGrid>
     </p>
     
 </MudText>
@@ -11,7 +30,13 @@
 
 @code
 {
-    private int? rolled = null;
+    private int number = 1;
+    private int sides = 6;
+    private int offset = 0;
+    private IEnumerable<int> rolled = null;
+    private string rolledRepresentation = "";
+    private int result = 0;
+
     private DiceRoller roller = new DiceRoller();
 
     private void RollDie()
@@ -19,9 +44,15 @@
         Console.WriteLine(
             "Rolling!"
         );
-        rolled = roller.RollDie();
-        Console.WriteLine(
-            $"Rolled a {rolled}!"
-        );
+        rolled = roller.RollDice(number, sides);
+        result = rolled.Sum() + offset;
+        rolledRepresentation = rolled
+            .Skip(1)
+            .Select(i => i.ToString())
+            .Aggregate(
+                rolled.First().ToString(),
+                (concatenated, current) => 
+                    concatenated = concatenated + ", " + current
+            );
     }
 }
