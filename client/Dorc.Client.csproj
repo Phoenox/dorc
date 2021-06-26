@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\modules\dice\dice.fsproj" />
+    <ProjectReference Include="..\modules\characters\view\Characters.View.csproj" />
   </ItemGroup>
 
 </Project>
