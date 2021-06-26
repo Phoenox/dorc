@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\model\characters.fsproj" />
+    <ProjectReference Include="..\model\Characters.Model.fsproj" />
   </ItemGroup>
 
 </Project>
