@@ -1,4 +1,4 @@
-namespace DiceSharp
+namespace Dorc.Dice
 
 module Dice =
 
