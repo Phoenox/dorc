@@ -39,9 +39,7 @@
 
     private void RollForBoth()
     {
-        ourRoll = RollDie();
-        jeanPierresRoll = RollDie();
+        ourRoll = roller.RollD20();
+        jeanPierresRoll = roller.RollD20();
     }
-
-    private int RollDie() => roller.RollDie();
 }

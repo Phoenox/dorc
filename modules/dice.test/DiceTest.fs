@@ -1,7 +1,7 @@
 module diceTests
 
 open NUnit.Framework
-open DiceSharp
+open Dorc.Dice
 
 [<SetUp>]
 let Setup () =
