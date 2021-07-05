@@ -1,9 +1,10 @@
 ﻿namespace Dorc.Characters
 
-module characters =
+module Characters =
 
     type Character =
         abstract member ToString : unit -> string
+        abstract member GetPlayerName : unit -> string
     
     // Defines a Character as used by Fate-Like games.
     //
@@ -20,8 +21,8 @@ module characters =
             aspects: List<string>
         ) =
         interface Character with
-        
             member this.ToString () = $"{this.Name} | {this.PlayerName}"
+            member this.GetPlayerName () = this.PlayerName
         
         new (prototype: FateCharacter, ?stress: Map<string, List<int>>, ?aspects : List<string>) =
             FateCharacter(
@@ -44,6 +45,23 @@ module characters =
                 .Add("Extreme", [])
 
 
+    type Campaign(
+        gameMaster: string,
+        playerCharacters: List<Character>,
+        nonPlayerCharacters: List<Character>
+        ) =
+        member this.GameMaster = gameMaster
+        member this.PlayerCharacters = playerCharacters
+        member this.NonPlayerCharacters = nonPlayerCharacters
 
+        new (gameMaster: string) = Campaign(gameMaster, List.Empty, List.Empty)
+
+        member this.ToString () =
+            $"{this.GameMaster} | {this.PlayerCharacters |> List.map (fun c -> c.GetPlayerName())}"
+
+
+    
         
+    
+
     
