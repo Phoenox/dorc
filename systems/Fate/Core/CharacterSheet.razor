@@ -1,0 +1,120 @@
+﻿@using Dorc.RoleplayingSystems.Fate.Core;
+@using Dorc.RoleplayingSystems.Base.Concepts;
+@inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository;
+
+@if (character is null)
+{
+	<MudText>Loading...</MudText>
+}
+else
+{
+	<EditForm Model="character" OnValidSubmit="Save">
+		<MudToolBar>
+			<MudSpacer/>
+			<MudButton Link="characters">Cancel</MudButton>
+			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Save</MudButton>
+		</MudToolBar>
+
+		<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" />
+		<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" />
+
+		<MudField Label="Aspects" Variant="Variant.Outlined">
+			<MudTextField Label="High Concept" @bind-Value="character.HighConcept" For="@(() => character.HighConcept)" />
+			<MudTextField Label="Dilemma" @bind-Value="character.Dilemma" For="@(() => character.Dilemma)" />
+			@for (var i = 0; i < character.Aspects.Count; i++)
+			{
+				var localVariable = i;
+				<MudTextField @bind-Value="character.Aspects[localVariable]" />
+			}
+			<MudButton OnClick="AddAspect">Add Aspect</MudButton>
+		</MudField>
+
+		<MudTable Items="character.Skills" Hover="true" Striped="true" CanCancelEdit="true" RowEditPreview="BackupSkill" RowEditCancel="ResetSkillToOriginalValues">
+			<ToolBarContent>
+				<MudText Typo="Typo.h6">Skills</MudText>
+				<MudSpacer/>
+				<MudButton OnClick="AddSkill">Add Skill</MudButton>
+			</ToolBarContent>
+			<HeaderContent>
+				<MudTh><MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Name)">Skill</MudTableSortLabel></MudTh>
+				<MudTh><MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Value)">Value</MudTableSortLabel></MudTh>
+			</HeaderContent>
+			<RowTemplate Context="skill">
+				<MudTd DataLabel="Skill">@skill.Name</MudTd>
+				<MudTd DataLabel="Value">@skill.Value</MudTd>
+			</RowTemplate>
+			<RowEditingTemplate Context="skill">
+				<MudTd DataLabel="Skill">
+					<MudTextField @bind-Value="@skill.Name"/>
+				</MudTd>
+				<MudTd DataLabel="Value">
+					<MudTextField @bind-Value="@skill.Value"/>
+				</MudTd>
+			</RowEditingTemplate>
+		</MudTable>
+
+		<MudField Label="Stunts" Variant="Variant.Outlined">
+			@for (var i = 0; i < character.Stunts.Count; i++)
+			{
+				var localVariable = i;
+				<MudTextField @bind-Value="character.Stunts[localVariable].Description" />
+			}
+			<MudButton OnClick="AddStunt">Add Stunt</MudButton>
+		</MudField>
+
+		<MudField Label="Extras" Variant="Variant.Outlined">
+			@for (var i = 0; i < character.Extras.Count; i++)
+			{
+				var localVariable = i;
+				<MudTextField @bind-Value="character.Extras[localVariable].Description" />
+			}
+			<MudButton OnClick="AddExtra">Add Extra</MudButton>
+		</MudField>
+
+	</EditForm>
+}
+
+@code {
+	[Parameter] public Character? character { get; set; }
+	Skill skillBeforeEdit = new();
+
+	void Save()
+	{
+		if (character is not null)
+			characterRepository.Update(character);
+	}
+
+	void AddAspect()
+	{
+		character?.Aspects.Add(string.Empty);
+	}
+
+	void AddExtra()
+	{
+		character?.Extras.Add(new Dorc.RoleplayingSystems.Fate.Extra());
+	}
+
+	void AddSkill()
+	{
+		character?.Skills.Add(new Dorc.RoleplayingSystems.Base.Concepts.Skill());
+	}
+
+	void AddStunt()
+	{
+		character?.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
+	}
+
+	void BackupSkill(object item)
+	{
+		var skill = (Skill)item;
+		skillBeforeEdit.Name = skill.Name;
+		skillBeforeEdit.Value = skill.Value;
+	}
+
+	void ResetSkillToOriginalValues(object item)
+	{
+		var skill = (Skill)item;
+		skill.Name = skillBeforeEdit.Name;
+		skill.Value = skillBeforeEdit.Value;
+	}
+}

@@ -1,0 +1,53 @@
+﻿@using Dorc.RoleplayingSystems.Base;
+@using Microsoft.AspNetCore.Components.Forms;
+@using System.ComponentModel.DataAnnotations;
+
+@inject ICharacterRepository characterRepository;
+@inject IRoleplayingSystemRepository systemRepository;
+
+<MudDialog>
+	<DialogContent>
+		<EditForm id="createCharacterForm" Model="@model" OnValidSubmit="CreateCharacter">
+			<DataAnnotationsValidator />
+			<MudSelect @bind-Value="@model.System" T="RoleplayingSystem" Label="System" OffsetY="true" ToStringFunc="@(system => system.Name)" For="@(() => model.System)">
+				@foreach (var system in systemRepository.GetAll())
+				{
+					<MudSelectItem Value="@system" />
+				}
+			</MudSelect>
+			<MudTextField Label="Name" @bind-Value="@model.Name" For="@(() => model.Name)" />
+			<MudTextField Label="Description" @bind-Value="@model.Description" For="@(() => model.Description)" />
+		</EditForm>
+	</DialogContent>
+	<DialogActions>
+		<MudButton OnClick="Cancel">Cancel</MudButton>
+		<MudButton ButtonType="ButtonType.Submit" form="createCharacterForm" Color="Color.Primary" Variant="Variant.Filled">Create</MudButton>
+	</DialogActions>
+</MudDialog>
+
+@code {
+	[CascadingParameter] MudDialogInstance MudDialog { get; set; }
+	private CreateCharacterModel model = new();
+
+	public class CreateCharacterModel
+	{
+		[Required]
+		public RoleplayingSystem System { get; set; }
+		[Required]
+		public string Name { get; set; }
+		public string Description { get; set; }
+	}
+
+	void CreateCharacter()
+	{
+		var character = model.System.CharacterGenerator.CreateDefaultCharacter();
+		character.Name = model.Name;
+		character.Description = model.Description;
+
+		characterRepository.Update(character);
+
+		MudDialog.Close(DialogResult.Ok(true));
+	}
+
+	void Cancel() => MudDialog.Cancel();
+}

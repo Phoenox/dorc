@@ -1,1 +1,51 @@
-﻿<MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Add" Link="character/create" Style="position: fixed; bottom: 2rem; right: 2rem;" />
+﻿@using Dorc.RoleplayingSystems.Base;
+
+@inject IDialogService DialogService
+@inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository;
+@inject Dorc.RoleplayingSystems.Base.IRoleplayingSystemRepository systemRepository;
+
+<MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Add" @onclick="OpenCreateCharacterDialog" Style="position: fixed; bottom: 2rem; right: 2rem;" />
+
+<MudGrid>
+	@foreach (var character in characters)
+	{
+		<MudItem xs="12">
+			<MudCard>
+				<MudCardContent>
+					<MudText>@character.Name</MudText>
+					<MudText Typo="Typo.body2">@character.Description</MudText>
+				</MudCardContent>
+				<MudCardActions>
+					<MudButton Link="@("character/" + character.Uuid)" Color="Color.Primary">Open</MudButton>
+				</MudCardActions>
+			</MudCard>
+		</MudItem>
+	}
+</MudGrid>
+
+@code {
+	private List<Character> characters { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		UpdateCharacters();
+	}
+
+	private async void OpenCreateCharacterDialog()
+	{
+		var dialog = DialogService.Show<CreateCharacterDialog>("Create character");
+		var result = await dialog.Result;
+
+		if (!result.Cancelled)
+		{
+			UpdateCharacters();
+			StateHasChanged();
+		}
+	}
+
+	private void UpdateCharacters()
+	{
+		characters = characterRepository.GetAll();
+	}
+}

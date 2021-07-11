@@ -7,8 +7,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.7" />
-    <PackageReference Include="MudBlazor" Version="5.0.14" />
+    <PackageReference Include="MudBlazor" Version="5.0.15" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\systems\Base\Base.csproj" />
   </ItemGroup>
 </Project>
