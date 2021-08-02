@@ -25,7 +25,7 @@ namespace Dorc.RoleplayingSystems.Base
 
 		public Character()
 		{
-			this.Uuid = Guid.NewGuid().ToString();
+			Uuid = Guid.NewGuid().ToString();
 		}
 	}
 }

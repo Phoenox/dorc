@@ -11,6 +11,6 @@
 	protected override void OnParametersSet()
 	{
 		var character = characterRepository.Get(CharacterUuid);
-		CharacterSheetFragment = character.System.CharacterSheetBuilder.CreateCharacterSheet(character);
+		CharacterSheetFragment = character.System.CreateCharacterSheet(character);
 	}
 }

@@ -43,7 +43,6 @@ namespace Dorc.Client
 			var fateCore = new RoleplayingSystems.Fate.Core.RoleplayingSystem
 			{
 				Group = fateSystems,
-				CharacterSerializer = new RoleplayingSystems.Fate.Core.CharacterSerializer(localStorage),
 			};
 			storage.Update(fateCore);
 		}

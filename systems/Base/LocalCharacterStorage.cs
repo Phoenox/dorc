@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,7 +47,14 @@ namespace Dorc.RoleplayingSystems.Base
 				var system = systemRepository.Get(character.SystemId);
 				if (system is null)
 					throw new KeyNotFoundException($"Cannot find a system with ID '{character.SystemId}'.");
-				character = system.CharacterSerializer?.Get(CharacterKeyPrefix + id) ?? character;
+
+				var getItemMethod = typeof(ISyncLocalStorageService).GetMethod(nameof(ISyncLocalStorageService.GetItem));
+				var genericGetMethod = getItemMethod?.MakeGenericMethod(system.CharacterType);
+				var parameters = new object[] { CharacterKeyPrefix + id };
+				character = genericGetMethod?.Invoke(localStorage, parameters) as Character;
+				if (character is null)
+					throw new InvalidOperationException($"Could not fetch character with ID '{id}'.");
+
 				character.System = system;
 			}
 			return character;

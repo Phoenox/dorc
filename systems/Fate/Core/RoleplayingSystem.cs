@@ -1,12 +1,14 @@
-﻿namespace Dorc.RoleplayingSystems.Fate.Core
+﻿using Fate.Core;
+
+namespace Dorc.RoleplayingSystems.Fate.Core
 {
 	public class RoleplayingSystem : Base.RoleplayingSystem
 	{
 		public RoleplayingSystem() : base("fateCore")
 		{
-			this.Name = "FATE Core";
-			this.CharacterGenerator = new CharacterGenerator(this);
-			this.CharacterSheetBuilder = new CharacterSheetBuilder();
+			CharacterType = typeof(Character);
+			CharacterSheetType = typeof(CharacterSheet);
+			Name = "FATE Core";
 		}
 	}
 }
