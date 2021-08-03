@@ -29,7 +29,7 @@ else
 			<MudButton OnClick="AddAspect">Add Aspect</MudButton>
 		</MudField>
 
-		<MudTable Items="character.Skills" Hover="true" Striped="true" CanCancelEdit="true" RowEditPreview="BackupSkill" RowEditCancel="ResetSkillToOriginalValues">
+		<MudTable Items="character.Skills" Hover="true" Striped="true">
 			<ToolBarContent>
 				<MudText Typo="Typo.h6">Skills</MudText>
 				<MudSpacer/>
@@ -40,17 +40,13 @@ else
 				<MudTh><MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Value)">Value</MudTableSortLabel></MudTh>
 			</HeaderContent>
 			<RowTemplate Context="skill">
-				<MudTd DataLabel="Skill">@skill.Name</MudTd>
-				<MudTd DataLabel="Value">@skill.Value</MudTd>
-			</RowTemplate>
-			<RowEditingTemplate Context="skill">
 				<MudTd DataLabel="Skill">
 					<MudTextField @bind-Value="@skill.Name"/>
 				</MudTd>
 				<MudTd DataLabel="Value">
 					<MudTextField @bind-Value="@skill.Value"/>
 				</MudTd>
-			</RowEditingTemplate>
+			</RowTemplate>
 		</MudTable>
 
 		<MudField Label="Stunts" Variant="Variant.Outlined">
@@ -76,7 +72,6 @@ else
 
 @code {
 	[Parameter] public Character? character { get; set; }
-	Skill skillBeforeEdit = new();
 
 	void Save()
 	{
@@ -102,19 +97,5 @@ else
 	void AddStunt()
 	{
 		character?.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
-	}
-
-	void BackupSkill(object item)
-	{
-		var skill = (Skill)item;
-		skillBeforeEdit.Name = skill.Name;
-		skillBeforeEdit.Value = skill.Value;
-	}
-
-	void ResetSkillToOriginalValues(object item)
-	{
-		var skill = (Skill)item;
-		skill.Name = skillBeforeEdit.Name;
-		skill.Value = skillBeforeEdit.Value;
 	}
 }
