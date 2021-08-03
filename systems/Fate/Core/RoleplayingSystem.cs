@@ -1,4 +1,5 @@
-﻿using Fate.Core;
+﻿using System;
+using Fate.Core;
 
 namespace Dorc.RoleplayingSystems.Fate.Core
 {
@@ -9,6 +10,14 @@ namespace Dorc.RoleplayingSystems.Fate.Core
 			CharacterType = typeof(Character);
 			CharacterSheetType = typeof(CharacterSheet);
 			Name = "FATE Core";
+		}
+
+		public override Base.Character CreateDefaultCharacter()
+		{
+			if (CreateCharacter() is not Character character)
+				throw new InvalidOperationException("Character is of invalid type.");
+			character.AddDefaultSkills();
+			return character;
 		}
 	}
 }

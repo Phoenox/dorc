@@ -30,6 +30,11 @@ namespace Dorc.RoleplayingSystems.Base
 			return character;
 		}
 
+		public virtual Character CreateDefaultCharacter()
+		{
+			return CreateCharacter();
+		}
+
 		public RenderFragment CreateCharacterSheet(Character character)
 		{
 			return (builder) =>
