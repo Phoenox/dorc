@@ -67,5 +67,16 @@ namespace Base.Test
 			var characterStorage = new LocalCharacterStorage(storageService.Object, systemRepository.Object);
 			Assert.Throws<KeyNotFoundException>(() => characterStorage.Get("12345"));
 		}
+
+		[Fact]
+		public void ItDeletesACharacter()
+		{
+			var character = new Character();
+			var storageService = new Mock<ISyncLocalStorageService>();
+			var characterStorage = new LocalCharacterStorage(storageService.Object, null);
+			characterStorage.Delete(character);
+			storageService.Verify(mock => mock.RemoveItem("characters/" + character.Uuid));
+			storageService.Verify(mock => mock.SetItem("characters", new List<string>()));
+		}
 	}
 }

@@ -1,0 +1,27 @@
+﻿@using Dorc.RoleplayingSystems.Base;
+
+@inject ICharacterRepository characterRepository;
+@inject IRoleplayingSystemRepository systemRepository;
+
+<MudDialog>
+	<DialogContent>
+		Do you really want to delete the character "@Character.Name"?
+	</DialogContent>
+	<DialogActions>
+		<MudButton OnClick="Cancel">Cancel</MudButton>
+		<MudButton OnClick="DeleteCharacter" Color="Color.Error" Variant="Variant.Filled">Delete</MudButton>
+	</DialogActions>
+</MudDialog>
+
+@code {
+	[CascadingParameter] MudDialogInstance MudDialog { get; set; }
+	[Parameter] public Character Character { get; set; }
+
+	void DeleteCharacter()
+	{
+		characterRepository.Delete(Character);
+		MudDialog.Close(DialogResult.Ok(true));
+	}
+
+	void Cancel() => MudDialog.Cancel();
+}

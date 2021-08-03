@@ -16,7 +16,12 @@
 					<MudText Typo="Typo.body2">@character.Description</MudText>
 				</MudCardContent>
 				<MudCardActions>
-					<MudButton Link="@("character/" + character.Uuid)" Color="Color.Primary">Open</MudButton>
+					<MudItem xs="12">
+						<MudItem Class="d-flex">
+							<MudButton Link="@("character/" + character.Uuid)" Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Visibility">Open</MudButton>
+							<MudButton Class="ml-auto" @onclick="@(() => OpenDeleteCharacterDialog(character))" Color="Color.Error" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
+						</MudItem>
+					</MudItem>
 				</MudCardActions>
 			</MudCard>
 		</MudItem>
@@ -35,6 +40,21 @@
 	private async void OpenCreateCharacterDialog()
 	{
 		var dialog = DialogService.Show<CreateCharacterDialog>("Create character");
+		var result = await dialog.Result;
+
+		if (!result.Cancelled)
+		{
+			UpdateCharacters();
+			StateHasChanged();
+		}
+	}
+
+	private async void OpenDeleteCharacterDialog(Character character)
+	{
+		var parameters = new DialogParameters();
+		parameters.Add("Character", character);
+
+		var dialog = DialogService.Show<DeleteCharacterDialog>("Delete character", parameters);
 		var result = await dialog.Result;
 
 		if (!result.Cancelled)

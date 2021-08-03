@@ -56,5 +56,15 @@ namespace Base.Test
 			Assert.Equal(otherGroupWithSameId, testSystem.Group);
 			Assert.Equal(otherGroupWithSameId, testSystemWithOtherGroup.Group);
 		}
+
+		[Fact]
+		public void ItDeletesASystem()
+		{
+			var repo = new RoleplayingSystemRepository();
+			repo.Update(testSystem);
+			repo.Delete(testSystem);
+
+			Assert.Throws<System.Collections.Generic.KeyNotFoundException>(() => repo.Get("test"));
+		}
 	}
 }

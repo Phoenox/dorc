@@ -59,5 +59,14 @@ namespace Dorc.RoleplayingSystems.Base
 			}
 			return character;
 		}
+
+		public void Delete(Character character)
+		{
+			localStorage.RemoveItem(CharacterKeyPrefix + character.Uuid);
+
+			var uuids = localStorage.GetItem<List<string>>(CharacterIndexKey) ?? new List<string>();
+			uuids.Remove(character.Uuid);
+			localStorage.SetItem(CharacterIndexKey, uuids);
+		}
 	}
 }
