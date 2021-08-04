@@ -24,7 +24,10 @@ else
 			@for (var i = 0; i < character.Aspects.Count; i++)
 			{
 				var localVariable = i;
-				<MudTextField @bind-Value="character.Aspects[localVariable]" />
+				<MudItem Class="d-flex">
+					<MudTextField @bind-Value="character.Aspects[localVariable]" />
+					<MudIconButton OnClick="@(() => character.Aspects.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+				</MudItem>
 			}
 			<MudButton OnClick="AddAspect">Add Aspect</MudButton>
 		</MudField>
@@ -46,6 +49,9 @@ else
 				<MudTd DataLabel="Value">
 					<MudTextField @bind-Value="@skill.Value"/>
 				</MudTd>
+				<MudTd>
+					<MudIconButton OnClick="@(() => character.Skills.Remove(skill))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+				</MudTd>
 			</RowTemplate>
 		</MudTable>
 
@@ -53,7 +59,10 @@ else
 			@for (var i = 0; i < character.Stunts.Count; i++)
 			{
 				var localVariable = i;
-				<MudTextField @bind-Value="character.Stunts[localVariable].Description" />
+				<MudItem Class="d-flex">
+					<MudTextField @bind-Value="character.Stunts[localVariable].Description" />
+					<MudIconButton OnClick="@(() => character.Stunts.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+				</MudItem>
 			}
 			<MudButton OnClick="AddStunt">Add Stunt</MudButton>
 		</MudField>
@@ -62,7 +71,10 @@ else
 			@for (var i = 0; i < character.Extras.Count; i++)
 			{
 				var localVariable = i;
-				<MudTextField @bind-Value="character.Extras[localVariable].Description" />
+				<MudItem Class="d-flex">
+					<MudTextField @bind-Value="character.Extras[localVariable].Description" />
+					<MudIconButton OnClick="@(() => character.Extras.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+				</MudItem>
 			}
 			<MudButton OnClick="AddExtra">Add Extra</MudButton>
 		</MudField>
