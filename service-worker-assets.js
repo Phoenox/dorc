@@ -161,7 +161,7 @@
       "url": "_framework\/dice.dll"
     },
     {
-      "hash": "sha256-Jpl8dtnG\/IHqXk0rfY6WR6YHUhMFM3N4inl\/ghwC7bE=",
+      "hash": "sha256-i+4FwfUdTNCDAdiww+hhlsWAW2KoBJMUiadSr7xBWuA=",
       "url": "_framework\/Fate.dll"
     },
     {
@@ -169,7 +169,7 @@
       "url": "_framework\/Shared.dll"
     },
     {
-      "hash": "sha256-3jWJRC2kySO7xO53Rjn+\/eRLVQjSysR9ss55whqYCVU=",
+      "hash": "sha256-sPpm7YhTcKuxK1wtlmtYWw6hNZ5K38o+3ho5rDyxuwg=",
       "url": "_framework\/Dorc.Client.dll"
     },
     {
@@ -385,7 +385,7 @@
       "url": "_framework\/zh-Hant\/FSharp.Core.resources.dll"
     },
     {
-      "hash": "sha256-cwE\/HCadoYsgd5eVoElkGAAx2ToiTdONI4Ei7AEYIwE=",
+      "hash": "sha256-HaOB+xRXoGr5VMqg0Vfj97382jNzNQQ7R3UqCvKwcvI=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -393,5 +393,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "ETE4HpBT"
+  "version": "jDMKa7Cl"
 };
