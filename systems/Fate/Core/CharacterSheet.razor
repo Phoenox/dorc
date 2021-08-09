@@ -15,7 +15,7 @@ else
 			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Save</MudButton>
 		</MudToolBar>
 
-		<InputFile id="portraitUpload" OnChange="UploadPortrait" />
+		<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*" />
 
 		<MudGrid>
 			<MudItem xs=10>
@@ -23,9 +23,8 @@ else
 				<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" />
 			</MudItem>
 			<MudItem xs=2 >
-				<MudButton for="portraitUpload">
-					Test
-					<!--<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />-->
+				<MudButton HtmlTag="label" for="portraitUpload">
+					<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
 				</MudButton>
 			</MudItem>
 		</MudGrid>
@@ -123,8 +122,29 @@ else
 		character?.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
 	}
 
-	void UploadPortrait()
+	async Task UploadPortrait(InputFileChangeEventArgs args)
 	{
-		Console.WriteLine("test");
+		if (character != null)
+		{
+			var imageSource = args.File;
+			var buffers = new byte[imageSource.Size];
+			await imageSource.OpenReadStream().ReadAsync(buffers);
+			string imageType = imageSource.ContentType;
+			character.Portrait =$"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+		}
+
+		@* if (imageSource != null)
+        {
+            // Convert to reasonably-sized JPEG
+            var imageFile = await imageSource.RequestImageFileAsync("image/png", 1024, 1024); //ToImageFileAsync("image/png", 800, 600);
+
+            // Represent it as a data URL we can display
+			var buffer = new System.IO.MemoryStream();
+            await imageFile.OpenReadStream().CopyToAsync(buffer);
+            character?.Portrait = buffer.ToString();
+
+
+			
+        } *@
 	}
 }
