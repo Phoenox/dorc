@@ -132,19 +132,5 @@ else
 			string imageType = imageSource.ContentType;
 			character.Portrait =$"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
 		}
-
-		@* if (imageSource != null)
-        {
-            // Convert to reasonably-sized JPEG
-            var imageFile = await imageSource.RequestImageFileAsync("image/png", 1024, 1024); //ToImageFileAsync("image/png", 800, 600);
-
-            // Represent it as a data URL we can display
-			var buffer = new System.IO.MemoryStream();
-            await imageFile.OpenReadStream().CopyToAsync(buffer);
-            character?.Portrait = buffer.ToString();
-
-
-			
-        } *@
 	}
 }
