@@ -85,7 +85,7 @@
       "url": "_framework\/Microsoft.AspNetCore.Components.Forms.dll"
     },
     {
-      "hash": "sha256-F6y9\/PgBHxG+iOAhzFxISG+jNidfQDbEGh9YDIBB240=",
+      "hash": "sha256-tYEdZ45y+xB7a2mg7eLn5cm7fy1s6VQWgRJ+iNHH7ok=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.dll"
     },
     {
@@ -149,11 +149,11 @@
       "url": "_framework\/System.IO.Pipelines.dll"
     },
     {
-      "hash": "sha256-nl37ella2dH\/5zRy0IzeN0ZnINKaUC90qx+re+IEYw0=",
+      "hash": "sha256-1uicj9029Z6OBCK3SJDBTQosx5g4QpgrwJGj0cdnD+s=",
       "url": "_framework\/Base.dll"
     },
     {
-      "hash": "sha256-+NGzX965Chog4N4FUGCrBn74fPyeT00LmBIZ+GhdM\/s=",
+      "hash": "sha256-JL3F3w2riW8XQQfrvYDgXrBVKE7S8oPfRAawpmMsO6g=",
       "url": "_framework\/Characters.View.dll"
     },
     {
@@ -161,7 +161,7 @@
       "url": "_framework\/dice.dll"
     },
     {
-      "hash": "sha256-i+4FwfUdTNCDAdiww+hhlsWAW2KoBJMUiadSr7xBWuA=",
+      "hash": "sha256-q3Ae7L5\/aQtagaS+5Jdwnt+xypqPBFzGSf8YVHR2pJo=",
       "url": "_framework\/Fate.dll"
     },
     {
@@ -169,7 +169,7 @@
       "url": "_framework\/Shared.dll"
     },
     {
-      "hash": "sha256-sPpm7YhTcKuxK1wtlmtYWw6hNZ5K38o+3ho5rDyxuwg=",
+      "hash": "sha256-9Z9e54g\/gEKjmc3umIwuFgPDfqVoPq6dyHVZxZbluAg=",
       "url": "_framework\/Dorc.Client.dll"
     },
     {
@@ -329,7 +329,7 @@
       "url": "_framework\/System.Threading.Tasks.Parallel.dll"
     },
     {
-      "hash": "sha256-nrO+njy5QGHywzwvamGGQXqHe2Cc3Ne+BNg+fL4oS60=",
+      "hash": "sha256-gJoqwchjfdpnuCNt4A\/c6KPzpS03j8MENXX4ciNlpcI=",
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
@@ -385,7 +385,7 @@
       "url": "_framework\/zh-Hant\/FSharp.Core.resources.dll"
     },
     {
-      "hash": "sha256-HaOB+xRXoGr5VMqg0Vfj97382jNzNQQ7R3UqCvKwcvI=",
+      "hash": "sha256-TQ4i4exvar6q7MVWY97ufy+SmtgJ3OMik\/Wc2AVR4DU=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -393,5 +393,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "jDMKa7Cl"
+  "version": "vyG6w6Qp"
 };
