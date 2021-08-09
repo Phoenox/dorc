@@ -15,8 +15,19 @@ else
 			<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Save</MudButton>
 		</MudToolBar>
 
-		<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" />
-		<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" />
+		<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*" />
+
+		<MudGrid>
+			<MudItem xs=10>
+				<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" />
+				<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" />
+			</MudItem>
+			<MudItem xs=2 >
+				<MudButton HtmlTag="label" for="portraitUpload">
+					<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
+				</MudButton>
+			</MudItem>
+		</MudGrid>
 
 		<MudField Label="Aspects" Variant="Variant.Outlined">
 			<MudTextField Label="High Concept" @bind-Value="character.HighConcept" For="@(() => character.HighConcept)" />
@@ -109,5 +120,17 @@ else
 	void AddStunt()
 	{
 		character?.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
+	}
+
+	async Task UploadPortrait(InputFileChangeEventArgs args)
+	{
+		if (character != null)
+		{
+			var imageSource = args.File;
+			var buffers = new byte[imageSource.Size];
+			await imageSource.OpenReadStream().ReadAsync(buffers);
+			string imageType = imageSource.ContentType;
+			character.Portrait =$"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+		}
 	}
 }

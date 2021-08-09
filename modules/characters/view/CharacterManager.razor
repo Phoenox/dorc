@@ -11,10 +11,20 @@
 	{
 		<MudItem xs="12">
 			<MudCard>
+				<MudCardHeader>
+					<CardHeaderAvatar>
+						<MudAvatar Image=@character.Portrait Style="height: 5rem; width: 5rem;" />
+					</CardHeaderAvatar>
+					<CardHeaderContent>
+						<MudText Typo="Typo.h4">@character.Name</MudText>
+					</CardHeaderContent>
+				</MudCardHeader>
+				@if (!String.IsNullOrEmpty(character.Description))
+				{
 				<MudCardContent>
-					<MudText>@character.Name</MudText>
-					<MudText Typo="Typo.body2">@character.Description</MudText>
+					<MudText Typo="Typo.body1">@character.Description</MudText>
 				</MudCardContent>
+				}
 				<MudCardActions>
 					<MudItem xs="12">
 						<MudItem Class="d-flex">
