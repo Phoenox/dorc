@@ -90,6 +90,23 @@ else
 			<MudButton OnClick="AddExtra">Add Extra</MudButton>
 		</MudField>
 
+		<MudField Label="Stress" Variant="Variant.Outlined">
+			<MudGrid>
+				@foreach (var stressBar in character.StressBars)
+				{
+					<MudItem Class="my-auto" xs="3">
+						<MudText Typo="Typo.h6">@stressBar.Name</MudText>
+					</MudItem>
+					<MudItem xs="9">
+						@foreach (var stressBox in @stressBar.StressBoxes)
+						{
+							<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()" />
+						}
+					</MudItem>
+				}
+			</MudGrid>
+		</MudField>
+
 	</EditForm>
 }
 

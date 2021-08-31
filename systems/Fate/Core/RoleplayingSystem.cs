@@ -17,6 +17,7 @@ namespace Dorc.RoleplayingSystems.Fate.Core
 			if (CreateCharacter() is not Character character)
 				throw new InvalidOperationException("Character is of invalid type.");
 			character.AddDefaultSkills();
+			character.AddDefaultStress();
 			return character;
 		}
 	}

@@ -11,8 +11,7 @@ namespace Dorc.RoleplayingSystems.Fate.Core
 		public List<Skill> Skills { get; } = new();
 		public List<Stunt> Stunts { get; } = new();
 		public List<Extra> Extras { get; } = new();
-		public StressBar PhysicalStressBar { get; } = new StressBar(2);
-		public StressBar MentalStressBar { get; } = new StressBar(2);
+		public List<StressBar> StressBars { get; } = new();
 
 		public void AddDefaultSkills()
 		{
@@ -39,6 +38,12 @@ namespace Dorc.RoleplayingSystems.Fate.Core
 			};
 
 			defaultSkills.ForEach(skillName => Skills.Add(new Skill { Name = skillName }));
+		}
+
+		public void AddDefaultStress()
+		{
+			StressBars.Add(new StressBar("Physical", 2));
+			StressBars.Add(new StressBar("Mental", 2));
 		}
 	}
 }
