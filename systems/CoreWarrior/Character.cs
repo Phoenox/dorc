@@ -7,6 +7,6 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 	public class Character : Fate.Core.Character
 	{
 		public List<Stunt> MechStunts = new();
-		public Mech Mech = new();
+		public Mech Mech = null;
 	}
 }

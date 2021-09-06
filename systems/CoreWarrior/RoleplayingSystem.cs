@@ -7,7 +7,7 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 		public RoleplayingSystem() : base("coreWarrior")
 		{
 			CharacterType = typeof(Character);
-			// CharacterSheetType = typeof(CharacterSheet);
+			//CharacterSheetType = typeof(CharacterSheet);
 			Name = "CoreWarrior";
 		}
 
@@ -23,6 +23,8 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 		{
 			switch (tonnage)
 			{
+				case < 20:
+					return MechClass.Other;
 				case <= 35:
 					return MechClass.Light;
 				case <= 55:
