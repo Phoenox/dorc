@@ -1,0 +1,6 @@
+# We could let this one inspire us:
+# https://github.com/dotnet/roslyn/blob/main/.editorconfig
+
+# Tab indentation (no size specified)
+[*.{cs,razor,json}]
+indent_style = tab
