@@ -5,7 +5,6 @@ using Dorc.RoleplayingSystems.Fate;
 
 namespace Dorc.RoleplayingSystems.CoreWarrior
 {
-
 	public class Mech
 	{
 		public string Description { get; set; } = "";

@@ -40,11 +40,18 @@ namespace Dorc.Client
 			{
 				Name = "FATE",
 			};
+
 			var fateCore = new RoleplayingSystems.Fate.Core.RoleplayingSystem
 			{
 				Group = fateSystems,
 			};
 			storage.Update(fateCore);
+
+			var coreWarrior = new RoleplayingSystems.CoreWarrior.RoleplayingSystem
+			{
+				Group = fateSystems,
+			};
+			storage.Update(coreWarrior);
 		}
 	}
 	public class NewtonSoftJsonSerializer : IJsonSerializer

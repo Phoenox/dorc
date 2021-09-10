@@ -8,6 +8,7 @@
 }
 else
 {
+	/*
 	<EditForm Model="character" OnValidSubmit="Save">
 		<MudToolBar>
 			<MudSpacer/>
@@ -30,20 +31,20 @@ else
 		</MudGrid>
 
 		<MudField Label="Aspects" Variant="Variant.Outlined">
-			<MudTextField Label="High Concept" @bind-Value="character.HighConcept" For="@(() => character.HighConcept)" />
-			<MudTextField Label="Dilemma" @bind-Value="character.Dilemma" For="@(() => character.Dilemma)" />
+			<MudTextField Label="High Concept" @bind-Value="character.FateComponent.HighConcept" For="@(() => character.FateComponent.HighConcept)" />
+			<MudTextField Label="Dilemma" @bind-Value="character.FateComponent.Dilemma" For="@(() => character.FateComponent.Dilemma)" />
 			@for (var i = 0; i < character.Aspects.Count; i++)
 			{
 				var localVariable = i;
 				<MudItem Class="d-flex">
-					<MudTextField @bind-Value="character.Aspects[localVariable]" />
-					<MudIconButton OnClick="@(() => character.Aspects.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+					<MudTextField @bind-Value="character.FateComponent.Aspects[localVariable]" />
+					<MudIconButton OnClick="@(() => character.FateComponent.Aspects.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
 				</MudItem>
 			}
 			<MudButton OnClick="AddAspect">Add Aspect</MudButton>
 		</MudField>
 
-		<MudTable Items="character.Skills" Hover="true" Striped="true">
+		<MudTable Items="character.FateComponent.Skills" Hover="true" Striped="true">
 			<ToolBarContent>
 				<MudText Typo="Typo.h6">Skills</MudText>
 				<MudSpacer/>
@@ -61,18 +62,18 @@ else
 					<MudTextField @bind-Value="@skill.Value"/>
 				</MudTd>
 				<MudTd>
-					<MudIconButton OnClick="@(() => character.Skills.Remove(skill))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+					<MudIconButton OnClick="@(() => character.FateComponent.Skills.Remove(skill))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
 				</MudTd>
 			</RowTemplate>
 		</MudTable>
 
 		<MudField Label="Stunts" Variant="Variant.Outlined">
-			@for (var i = 0; i < character.Stunts.Count; i++)
+			@for (var i = 0; i < character.FateComponent.Stunts.Count; i++)
 			{
 				var localVariable = i;
 				<MudItem Class="d-flex">
 					<MudTextField @bind-Value="character.Stunts[localVariable].Description" />
-					<MudIconButton OnClick="@(() => character.Stunts.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+					<MudIconButton OnClick="@(() => character.FateComponent.Stunts.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
 				</MudItem>
 			}
 			<MudButton OnClick="AddStunt">Add Stunt</MudButton>
@@ -83,8 +84,8 @@ else
 			{
 				var localVariable = i;
 				<MudItem Class="d-flex">
-					<MudTextField @bind-Value="character.Extras[localVariable].Description" />
-					<MudIconButton OnClick="@(() => character.Extras.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+					<MudTextField @bind-Value="character.FateComponent.Extras[localVariable].Description" />
+					<MudIconButton OnClick="@(() => character.FateComponent.Extras.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
 				</MudItem>
 			}
 			<MudButton OnClick="AddExtra">Add Extra</MudButton>
@@ -92,7 +93,7 @@ else
 
 		<MudField Label="Stress" Variant="Variant.Outlined">
 			<MudGrid>
-				@foreach (var stressBar in character.StressBars)
+				@foreach (var stressBar in character.FateComponent.StressBars)
 				{
 					<MudItem Class="my-auto" xs="3">
 						<MudText Typo="Typo.h6">@stressBar.Name</MudText>
@@ -108,6 +109,7 @@ else
 		</MudField>
 
 	</EditForm>
+	*/
 }
 
 @code {
@@ -121,22 +123,22 @@ else
 
 	void AddAspect()
 	{
-		character?.Aspects.Add(string.Empty);
+		character?.FateComponent.Aspects.Add(string.Empty);
 	}
 
 	void AddExtra()
 	{
-		character?.Extras.Add(new Dorc.RoleplayingSystems.Fate.Extra());
+		character?.FateComponent.Extras.Add(new Dorc.RoleplayingSystems.Fate.Extra());
 	}
 
 	void AddSkill()
 	{
-		character?.Skills.Add(new Dorc.RoleplayingSystems.Base.Concepts.Skill());
+		character?.FateComponent.Skills.Add(new Dorc.RoleplayingSystems.Base.Concepts.Skill());
 	}
 
 	void AddStunt()
 	{
-		character?.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
+		character?.FateComponent.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
 	}
 
 	void AddMechStunt()

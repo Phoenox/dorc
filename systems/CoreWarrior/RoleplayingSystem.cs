@@ -1,4 +1,5 @@
 ﻿using System;
+using Dorc.RoleplayingSystems.CoreWarrior;
 
 namespace Dorc.RoleplayingSystems.CoreWarrior
 {
@@ -7,6 +8,7 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 		public RoleplayingSystem() : base("coreWarrior")
 		{
 			CharacterType = typeof(Character);
+			// TODO: Make CharacterSheet resolvable!
 			//CharacterSheetType = typeof(CharacterSheet);
 			Name = "CoreWarrior";
 		}
@@ -15,7 +17,8 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 		{
 			if (CreateCharacter() is not Character character)
 				throw new InvalidOperationException("Character is of invalid type.");
-			character.AddDefaultSkills();
+			character.FateComponent.AddDefaultSkills();
+			character.FateComponent.AddDefaultStress();
 			return character;
 		}
 

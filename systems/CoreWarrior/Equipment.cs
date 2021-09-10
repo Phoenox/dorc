@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Dorc.RoleplayingSystems.CoreWarrior
 {
-
 	public class Equipment
 	{
 		public string Description { get; set; } = "";
