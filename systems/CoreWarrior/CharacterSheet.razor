@@ -154,7 +154,7 @@ else
 			var buffers = new byte[imageSource.Size];
 			await imageSource.OpenReadStream().ReadAsync(buffers);
 			string imageType = imageSource.ContentType;
-			character.Portrait =$"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+			character.Portrait = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
 		}
 	}
 }

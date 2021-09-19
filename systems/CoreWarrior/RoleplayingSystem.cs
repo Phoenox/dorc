@@ -1,5 +1,5 @@
 ﻿using System;
-using Dorc.RoleplayingSystems.CoreWarrior;
+using CoreWarrior;
 
 namespace Dorc.RoleplayingSystems.CoreWarrior
 {
@@ -9,7 +9,7 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 		{
 			CharacterType = typeof(Character);
 			// TODO: Make CharacterSheet resolvable!
-			//CharacterSheetType = typeof(CharacterSheet);
+			CharacterSheetType = typeof(CharacterSheet);
 			Name = "CoreWarrior";
 		}
 
