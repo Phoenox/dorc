@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\modules\dice\dice.fsproj" />
     <ProjectReference Include="..\modules\characters\view\Characters.View.csproj" />
+    <ProjectReference Include="..\shared\Shared.csproj" />
     <ProjectReference Include="..\systems\Fate\Fate.csproj" />
     <ProjectReference Include="..\systems\CoreWarrior\CoreWarrior.csproj" />
   </ItemGroup>

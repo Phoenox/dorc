@@ -1,10 +1,14 @@
 @inherits LayoutComponentBase
+@implements Dorc.Shared.IContextualAppBarParent;
+@using Dorc.Shared;
 
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleDrawer())" />
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/Phoenox/dorc" Target="_blank" />
+        @titlePart
+        <MudSpacer />
+        @actionPart
     </MudAppBar>
     <MudDrawer @bind-Open="isDrawerOpen" Elevation="2">
         <MudDrawerHeader>
@@ -21,13 +25,28 @@
         </MudNavMenu>
     </MudDrawer>
     <MudMainContent>
-        <MudContainer Class="pa-8">
-            @Body
-        </MudContainer>
+	    <MudContainer Class="pa-8">
+		    <CascadingValue Value="this">
+				@Body
+		    </CascadingValue>
+	    </MudContainer>
     </MudMainContent>
 </MudLayout>
 
 @code {
+    RenderFragment titlePart => appBar?.Title;
+    RenderFragment actionPart => appBar?.Actions;
+
+    ContextualAppBar appBar;
+
+    public void SetContextualAppBar(ContextualAppBar appBar)
+    {
+        this.appBar = appBar;
+		Update();
+	}
+
+	public void Update() => StateHasChanged();
+
     bool isDrawerOpen = true;
 
     void ToggleDrawer()
