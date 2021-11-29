@@ -1,157 +1,187 @@
 ﻿@using Dorc.RoleplayingSystems.Fate.Core;
 @using Dorc.RoleplayingSystems.Base.Concepts;
 @using Dorc.Shared;
+@using Microsoft.Extensions.Logging;
+@using Microsoft.JSInterop;
 @using System;
+@using Newtonsoft.Json;
+
 @inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository;
+@inject IJSRuntime JS;
+@inject ILogger<Index> Logger;
 
 @if (character is null)
 {
-    <MudText>Loading...</MudText>
+	<MudText>Loading...</MudText>
 }
 else
 {
-    <ContextualAppBar>
-        <Title>
-            <MudText Typo="Typo.h4">@character.Name</MudText>
-        </Title>
-        <Actions>
-            <MudButton OnClick="Save" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Inherit">Save</MudButton>
-            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit">
-            </MudMenu>
-        </Actions>
-    </ContextualAppBar>
+	<ContextualAppBar>
+	<Title>
+		<MudText Typo="Typo.h4">@character.Name</MudText>
+	</Title>
+	<Actions>
+		<MudButton OnClick="Save" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Inherit">
+			Save
+		</MudButton>
+		<MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit">
+			<MudMenuItem OnClick="ExportCharacter">Export...</MudMenuItem>
+		</MudMenu>
+	</Actions>
+</ContextualAppBar>
 
-    <InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*" />
+	<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*" />
 
-    <MudGrid>
-        <MudItem xs=10>
-            <MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" />
-            <MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" />
-        </MudItem>
-        <MudItem xs=2>
-            <MudButton HtmlTag="label" for="portraitUpload">
-                <MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
-            </MudButton>
-        </MudItem>
-    </MudGrid>
+	<MudGrid>
+		<MudItem xs=10>
+			<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" />
+			<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" />
+		</MudItem>
+		<MudItem xs=2>
+			<MudButton HtmlTag="label" for="portraitUpload">
+				<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
+			</MudButton>
+		</MudItem>
+	</MudGrid>
 
-    <MudField Label="Aspects" Variant="Variant.Outlined">
-        <MudTextField Label="High Concept" @bind-Value="character.HighConcept" For="@(() => character.HighConcept)" />
-        <MudTextField Label="Dilemma" @bind-Value="character.Dilemma" For="@(() => character.Dilemma)" />
-        @for (var i = 0; i < character.Aspects.Count; i++)
-        {
-            var localVariable = i;
-            <MudItem Class="d-flex">
-                <MudTextField @bind-Value="character.Aspects[localVariable]" />
-                <MudIconButton OnClick="@(() => character.Aspects.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-            </MudItem>
-        }
-        <MudButton OnClick="AddAspect">Add Aspect</MudButton>
-    </MudField>
+	<MudField Label="Aspects" Variant="Variant.Outlined">
+		<MudTextField Label="High Concept" @bind-Value="character.HighConcept" For="@(() => character.HighConcept)" />
+		<MudTextField Label="Dilemma" @bind-Value="character.Dilemma" For="@(() => character.Dilemma)" />
+		@for (var i = 0; i < character.Aspects.Count; i++)
+		{
+			var localVariable = i;
+			<MudItem Class="d-flex">
+				<MudTextField @bind-Value="character.Aspects[localVariable]" />
+				<MudIconButton OnClick="@(() => character.Aspects.RemoveAt(localVariable))" Class="align-self-center"
+			Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+			</MudItem>
+		}
+		<MudButton OnClick="AddAspect">Add Aspect</MudButton>
+	</MudField>
 
-    <MudTable Breakpoint="Breakpoint.None" Items="character.Skills" Hover="true" Striped="true">
-        <ToolBarContent>
-            <MudText Typo="Typo.h6">Skills</MudText>
-            <MudSpacer />
-            <MudButton OnClick="AddSkill">Add Skill</MudButton>
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh><MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Name)">Skill</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Value)">Value</MudTableSortLabel></MudTh>
-        </HeaderContent>
-        <RowTemplate Context="skill">
-            <MudTd DataLabel="Skill">
-                <MudTextField @bind-Value="@skill.Name" />
-            </MudTd>
-            <MudTd DataLabel="Value">
-                <MudTextField @bind-Value="@skill.Value" />
-            </MudTd>
-            <MudTd>
-                <MudIconButton OnClick="@(() => character.Skills.Remove(skill))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-            </MudTd>
-        </RowTemplate>
-    </MudTable>
+	<MudTable Breakpoint="Breakpoint.None" Items="character.Skills" Hover="true" Striped="true">
+		<ToolBarContent>
+			<MudText Typo="Typo.h6">Skills</MudText>
+			<MudSpacer />
+			<MudButton OnClick="AddSkill">Add Skill</MudButton>
+		</ToolBarContent>
+		<HeaderContent>
+			<MudTh>
+				<MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Name)">Skill</MudTableSortLabel>
+			</MudTh>
+			<MudTh>
+				<MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Value)">Value</MudTableSortLabel>
+			</MudTh>
+		</HeaderContent>
+		<RowTemplate Context="skill">
+			<MudTd DataLabel="Skill">
+				<MudTextField @bind-Value="@skill.Name" />
+			</MudTd>
+			<MudTd DataLabel="Value">
+				<MudTextField @bind-Value="@skill.Value" />
+			</MudTd>
+			<MudTd>
+				<MudIconButton OnClick="@(() => character.Skills.Remove(skill))" Class="align-self-center"
+				Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+			</MudTd>
+		</RowTemplate>
+	</MudTable>
 
-    <MudField Label="Stunts" Variant="Variant.Outlined">
-        @for (var i = 0; i < character.Stunts.Count; i++)
-        {
-            var localVariable = i;
-            <MudItem Class="d-flex">
-                <MudTextField @bind-Value="character.Stunts[localVariable].Description" />
-                <MudIconButton OnClick="@(() => character.Stunts.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-            </MudItem>
-        }
-        <MudButton OnClick="AddStunt">Add Stunt</MudButton>
-    </MudField>
+	<MudField Label="Stunts" Variant="Variant.Outlined">
+		@for (var i = 0; i < character.Stunts.Count; i++)
+		{
+			var localVariable = i;
+			<MudItem Class="d-flex">
+				<MudTextField @bind-Value="character.Stunts[localVariable].Description" />
+				<MudIconButton OnClick="@(() => character.Stunts.RemoveAt(localVariable))" Class="align-self-center"
+			Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+			</MudItem>
+		}
+		<MudButton OnClick="AddStunt">Add Stunt</MudButton>
+	</MudField>
 
-    <MudField Label="Extras" Variant="Variant.Outlined">
-        @for (var i = 0; i < character.Extras.Count; i++)
-        {
-            var localVariable = i;
-            <MudItem Class="d-flex">
-                <MudTextField @bind-Value="character.Extras[localVariable].Description" />
-                <MudIconButton OnClick="@(() => character.Extras.RemoveAt(localVariable))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-            </MudItem>
-        }
-        <MudButton OnClick="AddExtra">Add Extra</MudButton>
-    </MudField>
+	<MudField Label="Extras" Variant="Variant.Outlined">
+		@for (var i = 0; i < character.Extras.Count; i++)
+		{
+			var localVariable = i;
+			<MudItem Class="d-flex">
+				<MudTextField @bind-Value="character.Extras[localVariable].Description" />
+				<MudIconButton OnClick="@(() => character.Extras.RemoveAt(localVariable))" Class="align-self-center"
+			Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+			</MudItem>
+		}
+		<MudButton OnClick="AddExtra">Add Extra</MudButton>
+	</MudField>
 
-    <MudField Label="Stress" Variant="Variant.Outlined">
-        <MudGrid>
-            @foreach (var stressBar in character.StressBars)
-            {
-                <MudItem Class="my-auto" xs="3">
-                    <MudText Typo="Typo.h6">@stressBar.Name</MudText>
-                </MudItem>
-                <MudItem xs="9">
-                    @foreach (var stressBox in @stressBar.StressBoxes)
-                    {
-                        <MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()" />
-                    }
-                </MudItem>
-            }
-        </MudGrid>
-    </MudField>
+	<MudField Label="Stress" Variant="Variant.Outlined">
+		<MudGrid>
+			@foreach (var stressBar in character.StressBars)
+			{
+				<MudItem Class="my-auto" xs="3">
+					<MudText Typo="Typo.h6">@stressBar.Name</MudText>
+				</MudItem>
+				<MudItem xs="9">
+					@foreach (var stressBox in @stressBar.StressBoxes)
+					{
+						<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()" />
+					}
+				</MudItem>
+			}
+		</MudGrid>
+	</MudField>
 }
 
 @code {
-    [Parameter] public Character? character { get; set; }
+	[Parameter] public Character? character { get; set; }
 
-    void Save()
-    {
-        if (character is not null)
-            characterRepository.Update(character);
-    }
+	void Save()
+	{
+		if (character is not null)
+			characterRepository.Update(character);
+	}
 
-    void AddAspect()
-    {
-        character?.Aspects.Add(string.Empty);
-    }
+	void AddAspect()
+	{
+		character?.Aspects.Add(string.Empty);
+	}
 
-    void AddExtra()
-    {
-        character?.Extras.Add(new Dorc.RoleplayingSystems.Fate.Extra());
-    }
+	void AddExtra()
+	{
+		character?.Extras.Add(new Dorc.RoleplayingSystems.Fate.Extra());
+	}
 
-    void AddSkill()
-    {
-        character?.Skills.Add(new Dorc.RoleplayingSystems.Base.Concepts.Skill());
-    }
+	void AddSkill()
+	{
+		character?.Skills.Add(new Dorc.RoleplayingSystems.Base.Concepts.Skill());
+	}
 
-    void AddStunt()
-    {
-        character?.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
-    }
+	void AddStunt()
+	{
+		character?.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
+	}
 
-    async Task UploadPortrait(InputFileChangeEventArgs args)
-    {
-        if (character != null)
-        {
-            var imageSource = args.File;
-            var buffers = new byte[imageSource.Size];
-            await imageSource.OpenReadStream().ReadAsync(buffers);
-            string imageType = imageSource.ContentType;
-            character.Portrait = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
-        }
-    }
+	async Task UploadPortrait(InputFileChangeEventArgs args)
+	{
+		if (character != null)
+		{
+			var imageSource = args.File;
+			var buffers = new byte[imageSource.Size];
+			await imageSource.OpenReadStream().ReadAsync(buffers);
+			string imageType = imageSource.ContentType;
+			character.Portrait = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+		}
+	}
+
+	async void ExportCharacter()
+	{
+		try
+		{
+			var characterJson = JsonConvert.SerializeObject(character);
+			await JS.InvokeVoidAsync("saveAs", null, characterJson);
+		}
+		catch (Exception exception)
+		{
+			Logger.Log(LogLevel.Error, $"Could not export character: {exception}");
+		}
+	}
 }
