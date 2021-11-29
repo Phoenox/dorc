@@ -5,11 +5,15 @@
       "url": "favicon.ico"
     },
     {
+      "hash": "sha256-Ymmqb88I9TVGHmWzIwEJXCNQ1aMT3vltLkb+y0Je7TI=",
+      "url": "filesystem.js"
+    },
+    {
       "hash": "sha256-L\/FSOtomiWrUlWhQNhZKco8P7PkbtBiTTTAoWux6+6I=",
       "url": "images\/logo.png"
     },
     {
-      "hash": "sha256-bb4/fziS3Scdk77di2+EJOCr+H3aeQc1fKh4oHBFWbo=",
+      "hash": "sha256-s96sOYZa9T/lCAm5lpKagLVzlhX5yWf6vYSKgo1pTH0=",
       "url": "index.html"
     },
     {
@@ -49,7 +53,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-qmbO3LNDz4BB+QIcU3ItgItYTqtChyVfFBe12U57gG8=",
+      "hash": "sha256-m11TWevNZxkBqW56mLYHXpsutIL6DZDG6FsZqR68YUI=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -65,7 +69,7 @@
       "url": "_framework\/Characters.View.dll"
     },
     {
-      "hash": "sha256-9JEi49sRfhr7zkbYCinxomlnaMVHyivRRiIqiHgzJ0A=",
+      "hash": "sha256-T\/Nh3qlNA+e3nfVFZJ0ZKJEsAOUkAzYdDzW06DwuBG0=",
       "url": "_framework\/CoreWarrior.dll"
     },
     {
@@ -73,11 +77,11 @@
       "url": "_framework\/dice.dll"
     },
     {
-      "hash": "sha256-tAZ001pp4MbPSCOzAvelnBYVdYrKP1X9m0T4AX\/c7fU=",
+      "hash": "sha256-oQDZWPSAcybD+eXPUbnsnycl7N6b6rmPwM9GQjbq6+A=",
       "url": "_framework\/Dorc.Client.dll"
     },
     {
-      "hash": "sha256-kppyh7lMrzt9Uu4FMaej+Bse5hBf2FWfCfpzecq\/DEU=",
+      "hash": "sha256-9ZsFVc1GOZr6D9Shi1JjMewAfa\/y26xL+IRs5Ds1lSY=",
       "url": "_framework\/Fate.dll"
     },
     {
@@ -125,7 +129,7 @@
       "url": "_framework\/Microsoft.Extensions.DependencyInjection.dll"
     },
     {
-      "hash": "sha256-kf3HUdScrQ5nL65UDxYlJFd\/T8L6DhfmXHEbgYzDzLg=",
+      "hash": "sha256-A85TjE2F\/KSPl9T+YDKB9bTMq1Zn6dImWvJKz7Ah7nE=",
       "url": "_framework\/Microsoft.Extensions.Logging.Abstractions.dll"
     },
     {
@@ -285,7 +289,7 @@
       "url": "_framework\/System.Runtime.CompilerServices.Unsafe.dll"
     },
     {
-      "hash": "sha256-2l+H6dMFPQmB6M9MuLLrZs1fAx7DGc3dgMinY\/2s7so=",
+      "hash": "sha256-TKTg7bKgGEdy9zCrCoSrdSHYCJ4BtU8G9gS+71b\/\/SE=",
       "url": "_framework\/System.Runtime.dll"
     },
     {
@@ -401,5 +405,5 @@
       "url": "_content\/Characters.View\/Characters.View.bundle.scp.css"
     }
   ],
-  "version": "mevkiXCk"
+  "version": "chROiswO"
 };
