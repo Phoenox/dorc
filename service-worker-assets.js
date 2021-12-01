@@ -5,7 +5,7 @@
       "url": "favicon.ico"
     },
     {
-      "hash": "sha256-Ymmqb88I9TVGHmWzIwEJXCNQ1aMT3vltLkb+y0Je7TI=",
+      "hash": "sha256-is1vi9sHQ1GKez\/nlFUWCvmIS3CrxKMgkMMV2CjWs\/8=",
       "url": "filesystem.js"
     },
     {
@@ -53,11 +53,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-m11TWevNZxkBqW56mLYHXpsutIL6DZDG6FsZqR68YUI=",
+      "hash": "sha256-Sf5Ul0m\/zaT21Kxzheq79BWGCZSZBhhlZlmQZwowrVU=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-Y5AP0td2VnJJn\/Wdd6mvwHMXVqU943wKZaqObXVWyKg=",
+      "hash": "sha256-6OuYbaa36MA5Oo\/Vas3xBUXD8qHv\/\/FZI3seQ\/11cZ4=",
       "url": "_framework\/Base.dll"
     },
     {
@@ -65,11 +65,11 @@
       "url": "_framework\/Blazored.LocalStorage.dll"
     },
     {
-      "hash": "sha256-nGy9U2AYdPChhy9kJGH5+dQMZawnf1Th\/oycAZAdc6c=",
+      "hash": "sha256-NWCNGcju50F1iO4+JCHwQ61EEw7ZEGPaQM\/QTMgUHE4=",
       "url": "_framework\/Characters.View.dll"
     },
     {
-      "hash": "sha256-T\/Nh3qlNA+e3nfVFZJ0ZKJEsAOUkAzYdDzW06DwuBG0=",
+      "hash": "sha256-V23s4\/YfkpX0kW\/qZ\/ShZmBTVIqJKTIUvWhRdWTSv8U=",
       "url": "_framework\/CoreWarrior.dll"
     },
     {
@@ -77,11 +77,11 @@
       "url": "_framework\/dice.dll"
     },
     {
-      "hash": "sha256-oQDZWPSAcybD+eXPUbnsnycl7N6b6rmPwM9GQjbq6+A=",
+      "hash": "sha256-77nd5x\/6QFl+h4lb8+yzG9brzcz0dFoiNON1IlGPYlA=",
       "url": "_framework\/Dorc.Client.dll"
     },
     {
-      "hash": "sha256-9ZsFVc1GOZr6D9Shi1JjMewAfa\/y26xL+IRs5Ds1lSY=",
+      "hash": "sha256-4extzQ+6PoVS\/\/SGf7I5xWLfFewJDBP8x0UeZhrbjdI=",
       "url": "_framework\/Fate.dll"
     },
     {
@@ -129,7 +129,7 @@
       "url": "_framework\/Microsoft.Extensions.DependencyInjection.dll"
     },
     {
-      "hash": "sha256-A85TjE2F\/KSPl9T+YDKB9bTMq1Zn6dImWvJKz7Ah7nE=",
+      "hash": "sha256-eNQGZxHGOGsdlJy8gtrt9BAYdw6EHz24kup\/SCN0j8A=",
       "url": "_framework\/Microsoft.Extensions.Logging.Abstractions.dll"
     },
     {
@@ -405,5 +405,5 @@
       "url": "_content\/Characters.View\/Characters.View.bundle.scp.css"
     }
   ],
-  "version": "chROiswO"
+  "version": "viUor+KJ"
 };
