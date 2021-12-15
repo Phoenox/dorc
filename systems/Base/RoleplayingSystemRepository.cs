@@ -32,6 +32,11 @@ namespace Dorc.RoleplayingSystems.Base
 			return systems[id];
 		}
 
+		public bool Has(string id)
+		{
+			return systems.ContainsKey(id);
+		}
+
 		public List<RoleplayingSystem> GetAll()
 		{
 			return systems.Values.ToList();

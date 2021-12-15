@@ -23,8 +23,9 @@ namespace Dorc.Client
 			builder.Services.AddMudServices();
 			builder.Services.AddBlazoredLocalStorage();
 			builder.Services.Replace(ServiceDescriptor.Scoped<IJsonSerializer, NewtonSoftJsonSerializer>());
-			builder.Services.AddScoped<ICharacterRepository, LocalCharacterStorage>();
 			builder.Services.AddScoped<IRoleplayingSystemRepository, RoleplayingSystemRepository>();
+			builder.Services.AddScoped<ICharacterFactory, CharacterFactory>();
+			builder.Services.AddScoped<ICharacterRepository, LocalCharacterStorage>();
 
 			var host = builder.Build();
 

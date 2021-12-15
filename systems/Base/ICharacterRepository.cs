@@ -1,7 +1,7 @@
-﻿using Dorc.Shared;
-
-namespace Dorc.RoleplayingSystems.Base
+﻿namespace Dorc.RoleplayingSystems.Base
 {
+	using Dorc.Shared;
+
 	public interface ICharacterRepository : IRepository<Character>
 	{
 	}

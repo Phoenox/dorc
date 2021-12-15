@@ -60,6 +60,11 @@ namespace Dorc.RoleplayingSystems.Base
 			return character;
 		}
 
+		public bool Has(string id)
+		{
+			return localStorage.ContainKey(CharacterKeyPrefix + id);
+		}
+
 		public void Delete(Character character)
 		{
 			localStorage.RemoveItem(CharacterKeyPrefix + character.Uuid);

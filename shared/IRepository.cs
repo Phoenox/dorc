@@ -6,6 +6,7 @@ namespace Dorc.Shared
 	{
 		public void Update(T obj);
 		public T Get(string id);
+		public bool Has(string id);
 		public List<T> GetAll();
 		public void Delete(T obj);
 	}

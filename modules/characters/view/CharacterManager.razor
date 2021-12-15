@@ -1,8 +1,23 @@
 ﻿@using Dorc.RoleplayingSystems.Base;
+@using Dorc.Shared;
+@using Microsoft.AspNetCore.Components.Forms;
+@using Microsoft.Extensions.Logging;
+@using System.IO
+@using Newtonsoft.Json.Linq
 
 @inject IDialogService DialogService
-@inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository;
-@inject Dorc.RoleplayingSystems.Base.IRoleplayingSystemRepository systemRepository;
+@inject ILogger<Index> Logger
+@inject Dorc.RoleplayingSystems.Base.ICharacterFactory characterFactory
+@inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository
+@inject Dorc.RoleplayingSystems.Base.IRoleplayingSystemRepository systemRepository
+
+<InputFile id="importCharacter" OnChange="ImportCharacter" multiple hidden accept=".char" />
+
+<ContextualAppBar>
+	<Actions>
+		<MudButton HtmlTag="label" for="importCharacter" Variant="Variant.Outlined" Color="Color.Inherit">Import...</MudButton>
+	</Actions>
+</ContextualAppBar>
 
 <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Add" @onclick="OpenCreateCharacterDialog" Style="position: fixed; bottom: 2rem; right: 2rem;" />
 
@@ -21,9 +36,9 @@
 				</MudCardHeader>
 				@if (!String.IsNullOrEmpty(character.Description))
 				{
-				<MudCardContent>
-					<MudText Typo="Typo.body1">@character.Description</MudText>
-				</MudCardContent>
+					<MudCardContent>
+						<MudText Typo="Typo.body1">@character.Description</MudText>
+					</MudCardContent>
 				}
 				<MudCardActions>
 					<MudItem xs="12">
@@ -36,7 +51,7 @@
 			</MudCard>
 		</MudItem>
 	}
-</MudGrid>
+	</MudGrid>
 
 @code {
 	private List<Character> characters { get; set; }
@@ -53,10 +68,7 @@
 		var result = await dialog.Result;
 
 		if (!result.Cancelled)
-		{
 			UpdateCharacters();
-			StateHasChanged();
-		}
 	}
 
 	private async void OpenDeleteCharacterDialog(Character character)
@@ -68,14 +80,39 @@
 		var result = await dialog.Result;
 
 		if (!result.Cancelled)
-		{
 			UpdateCharacters();
-			StateHasChanged();
-		}
 	}
 
 	private void UpdateCharacters()
 	{
 		characters = characterRepository.GetAll();
+		StateHasChanged();
+	}
+
+	private async void ImportCharacter(InputFileChangeEventArgs e)
+	{
+		foreach (var file in e.GetMultipleFiles())
+		{
+			try
+			{
+				var characterJson = await new StreamReader(file.OpenReadStream()).ReadToEndAsync();
+				var character = characterFactory.CreateCharacterFromJson(JObject.Parse(characterJson));
+				if (characterRepository.Has(character.Uuid))
+				{
+					var parameters = new DialogParameters();
+					parameters.Add("ImportingCharacter", character);
+					parameters.Add("ExistingCharacter", characterRepository.Get(character.Uuid));
+					var dialog = DialogService.Show<CharacterExistsDialog>("Character already exists", parameters);
+					var result = await dialog.Result;
+					continue;
+				}
+				characterRepository.Update(character);
+			}
+			catch (Exception exception)
+			{
+				Logger.LogError($"Could not import character: {exception.Message}");
+			}
+		}
+		UpdateCharacters();
 	}
 }

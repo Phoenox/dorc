@@ -12,9 +12,8 @@
 			try
 			{
 				var characterJson = JsonConvert.SerializeObject(character, Formatting.Indented);
-				await js.InvokeVoidAsync("saveAs",
-						$"{{\"suggestedName\": \"{character?.Name}\", \"types\": [{{ \"description\": \"D'Orc characters\", \"accept\": {{\"dorc/character\": [\".char\"]}}}}]}}",
-						characterJson);
+				var options = $"{{\"suggestedName\": \"{character?.Name}.char\", \"types\": [{{ \"description\": \"D'Orc characters\", \"accept\": {{\"dorc/character\": [\".char\"]}}}}]}}";
+				await js.InvokeVoidAsync("saveAs", options,	characterJson);
 			}
 			catch (Exception exception)
 			{

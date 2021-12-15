@@ -1,0 +1,41 @@
+﻿@using Dorc.RoleplayingSystems.Base;
+@using Microsoft.AspNetCore.Components.Forms;
+@using System.ComponentModel.DataAnnotations;
+
+@inject ICharacterRepository characterRepository;
+@inject IRoleplayingSystemRepository systemRepository;
+
+<MudDialog>
+	<DialogContent>
+		There already exists a character with the same ID as a character you are about to import.<br />
+		Existing character: @ExistingCharacter.Name<br />
+		Importing character: @ImportingCharacter.Name<br />
+		Conflicting ID: @ExistingCharacter.Uuid
+	</DialogContent>
+	<DialogActions>
+		<MudButton OnClick="ImportWithNewId">Create new ID for importing character</MudButton>
+		<MudButton OnClick="Overwrite">Overwrite existing character</MudButton>
+		<MudButton OnClick="Cancel">Cancel</MudButton>
+	</DialogActions>
+</MudDialog>
+
+@code {
+	[CascadingParameter] MudDialogInstance MudDialog { get; set; }
+	[Parameter] public Character ExistingCharacter { get; set; }
+	[Parameter] public Character ImportingCharacter { get; set; }
+
+	void Overwrite()
+	{
+		characterRepository.Update(ImportingCharacter);
+		MudDialog.Close(DialogResult.Ok(true));
+	}
+
+	void ImportWithNewId()
+	{
+		ImportingCharacter.Uuid = Guid.NewGuid().ToString();
+		characterRepository.Update(ImportingCharacter);
+		MudDialog.Close(DialogResult.Ok(true));
+	}
+
+	void Cancel() => MudDialog.Cancel();
+}
