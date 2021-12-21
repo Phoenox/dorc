@@ -1,45 +1,45 @@
 ﻿@page "/"
 
-<img class="logo" src="images/logo.png"/>
+<MudPaper Class="pa-8">
+	<img class="logo" src="images/logo.png" />
 
-<MudText Typo="Typo.h4">Welcome!</MudText>
+	<MudText Typo="Typo.h4">Welcome!</MudText>
 
-<MudText Typo="Typo.body1">
-    Jean-Pierre D'Orc bids you welcome in his humble abode.<br>
-    As his honored guest, he will gladly assist you in all your tabletop roleplaying needs.
-</MudText>
+	<MudText Typo="Typo.body1">
+		Jean-Pierre D'Orc bids you welcome in his humble abode.<br>
+		As his honored guest, he will gladly assist you in all your tabletop roleplaying needs.
+	</MudText>
 
-<MudText Typo="Typo.body1">
-    <p>
-        For your first visit, why don't we 
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" class="rollbutton" @onclick="RollForBoth">
-            roll some dice
-        </MudButton>?
-    </p>
-    <p>
-        <MudGrid>
-            <MudItem xs="3">
-                <MudField Label="We Rolled" Variant="Variant.Outlined">@ourRoll</MudField> <br>
-            </MudItem>
-            <MudItem xs="3">
-                <MudField Label="Jean-Pierre Rolled" Variant="Variant.Outlined">@jeanPierresRoll</MudField>
-            </MudItem>
-        </MudGrid>
-        
-    </p>
-    
-</MudText>
+	<MudText Typo="Typo.body1">
+		<p>
+			For your first visit, why don't we
+			<MudButton Variant="Variant.Filled" Color="Color.Primary" class="rollbutton" @onclick="RollForBoth">
+				roll some dice
+			</MudButton>?
+		</p>
+		<p>
+			<MudGrid>
+				<MudItem xs="3">
+					<MudField Label="We Rolled" Variant="Variant.Outlined">@ourRoll</MudField> <br>
+				</MudItem>
+				<MudItem xs="3">
+					<MudField Label="Jean-Pierre Rolled" Variant="Variant.Outlined">@jeanPierresRoll</MudField>
+				</MudItem>
+			</MudGrid>
+		</p>
+	</MudText>
+</MudPaper>
 
 
 @code
 {
-    private int? ourRoll = null;
-    private int? jeanPierresRoll = null;
-    private DiceRoller roller = new DiceRoller();
+	private int? ourRoll = null;
+	private int? jeanPierresRoll = null;
+	private DiceRoller roller = new DiceRoller();
 
-    private void RollForBoth()
-    {
-        ourRoll = roller.RollD20();
-        jeanPierresRoll = roller.RollD20();
-    }
+	private void RollForBoth()
+	{
+		ourRoll = roller.RollD20();
+		jeanPierresRoll = roller.RollD20();
+	}
 }

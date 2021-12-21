@@ -41,159 +41,169 @@ else
 
 	<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*" />
 
-	<MudItem Class="d-flex">
-		<MudItem Class="flex-grow-1">
-			<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" ReadOnly="!IsEditable" />
-			<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" ReadOnly="!IsEditable" />
-		</MudItem>
-		<MudItem>
-			<MudButton HtmlTag="label" for="portraitUpload" Disabled="!IsEditable">
-				<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
-			</MudButton>
-		</MudItem>
-	</MudItem>
-
-	<MudField Label="Aspects" Variant="Variant.Outlined">
-		<MudTextField Label="High Concept" @bind-Value="character.HighConcept" For="@(() => character.HighConcept)" ReadOnly="!IsEditable" />
-		<MudTextField Label="Dilemma" @bind-Value="character.Dilemma" For="@(() => character.Dilemma)" ReadOnly="!IsEditable" />
-		@for (var i = 0; i < character.Aspects.Count; i++)
-		{
-			var localVariable = i;
-			<MudItem Class="d-flex">
-				<MudTextField @bind-Value="character.Aspects[localVariable]" ReadOnly="!IsEditable" />
-				@if (IsEditable)
-				{
-					<MudIconButton OnClick="@(() => character.Aspects.RemoveAt(localVariable))" Class="align-self-center"
-									 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-				}
+	<MudPaper Class="pa-8">
+		<MudItem Class="d-flex">
+			<MudItem Class="flex-grow-1">
+				<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" ReadOnly="!IsEditable" />
+				<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" ReadOnly="!IsEditable" />
 			</MudItem>
-		}
-		@if (IsEditable)
-		{
-			<MudButton OnClick="AddAspect">Add Aspect</MudButton>
-		}
-	</MudField>
+			<MudItem>
+				<MudButton HtmlTag="label" for="portraitUpload" Disabled="!IsEditable">
+					<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
+				</MudButton>
+			</MudItem>
+		</MudItem>
+
+		<MudField Label="Aspects" Variant="Variant.Outlined">
+			<MudTextField Label="High Concept" @bind-Value="character.HighConcept" For="@(() => character.HighConcept)" ReadOnly="!IsEditable" />
+			<MudTextField Label="Dilemma" @bind-Value="character.Dilemma" For="@(() => character.Dilemma)" ReadOnly="!IsEditable" />
+			@for (var i = 0; i < character.Aspects.Count; i++)
+			{
+				var localVariable = i;
+				<MudItem Class="d-flex">
+					<MudTextField @bind-Value="character.Aspects[localVariable]" ReadOnly="!IsEditable" />
+					@if (IsEditable)
+					{
+						<MudIconButton OnClick="@(() => character.Aspects.RemoveAt(localVariable))" Class="align-self-center"
+										 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+					}
+				</MudItem>
+			}
+			@if (IsEditable)
+			{
+				<MudButton OnClick="AddAspect">Add Aspect</MudButton>
+			}
+		</MudField>
+	</MudPaper>
 
 	@if (IsEditable || character.Skills.Count > 0)
 	{
-		<MudTable Breakpoint="Breakpoint.None" Items="character.Skills" Hover="true" Striped="true" Dense="true">
-			<ToolBarContent>
-				<MudText Typo="Typo.h6">Skills</MudText>
+		<MudPaper Class="mt-4">
+			<MudTable Breakpoint="Breakpoint.None" Items="character.Skills" Hover="true" Striped="true" Dense="true">
+				<ToolBarContent>
+					<MudText Typo="Typo.h6">Skills</MudText>
+					@if (IsEditable)
+			{
+				<MudSpacer />
+				<MudButton OnClick="AddSkill">Add Skill</MudButton>
+			}
+		</ToolBarContent>
+		<ColGroup>
+			<col style="width:90%;" />
+			<col style="width:10%;" />
+		</ColGroup>
+		<HeaderContent>
+			<MudTh>
+				<MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Name)">Skill</MudTableSortLabel>
+			</MudTh>
+			<MudTh Style="text-align:center">
+				<MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Value)">Value</MudTableSortLabel>
+			</MudTh>
+		</HeaderContent>
+		<RowTemplate Context="skill">
+			<MudTd DataLabel="Skill">
 				@if (IsEditable)
-		{
-			<MudSpacer />
-			<MudButton OnClick="AddSkill">Add Skill</MudButton>
-		}
-	</ToolBarContent>
-	<ColGroup>
-		<col style="width:90%;" />
-		<col style="width:10%;" />
-	</ColGroup>
-	<HeaderContent>
-		<MudTh>
-			<MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Name)">Skill</MudTableSortLabel>
-		</MudTh>
-		<MudTh Style="text-align:center">
-			<MudTableSortLabel SortBy="new Func<Skill, object>(skill => skill.Value)">Value</MudTableSortLabel>
-		</MudTh>
-	</HeaderContent>
-	<RowTemplate Context="skill">
-		<MudTd DataLabel="Skill">
-			@if (IsEditable)
-					{
-				<MudTextField @bind-Value="@skill.Name" />
-					}
-					else
-					{
-				@skill.Name
-					}
-		</MudTd>
-		<MudTd Style="text-align:center" DataLabel="Value">
-			@if (IsEditable)
-					{
-				<MudTextField @bind-Value="@skill.Value" />
-					}
-					else
-					{
-				@skill.Value
-					}
-		</MudTd>
-		@if (IsEditable)
-				{
-			<MudTd>
-				<MudIconButton OnClick="@(() => character.Skills.Remove(skill))" Class="align-self-center"
-										 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+						{
+					<MudTextField @bind-Value="@skill.Name" />
+						}
+						else
+						{
+					@skill.Name
+						}
 			</MudTd>
-				}
-	</RowTemplate>
-</MudTable>
+			<MudTd Style="text-align:center" DataLabel="Value">
+				@if (IsEditable)
+						{
+					<MudTextField @bind-Value="@skill.Value" />
+						}
+						else
+						{
+					@skill.Value
+						}
+			</MudTd>
+			@if (IsEditable)
+					{
+				<MudTd>
+					<MudIconButton OnClick="@(() => character.Skills.Remove(skill))" Class="align-self-center"
+											 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+				</MudTd>
+					}
+		</RowTemplate>
+	</MudTable>
+</MudPaper>
 	}
 
 	@if (IsEditable || character.Stunts.Count > 0)
 	{
-		<MudField Label="Stunts" Variant="Variant.Outlined">
-			@for (var i = 0; i < character.Stunts.Count; i++)
-			{
-				var localVariable = i;
-				<MudItem Class="d-flex">
-					<MudTextField @bind-Value="character.Stunts[localVariable].Description" ReadOnly="!IsEditable" />
-					@if (IsEditable)
-					{
-						<MudIconButton OnClick="@(() => character.Stunts.RemoveAt(localVariable))" Class="align-self-center"
-									 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-					}
-				</MudItem>
-			}
-			@if (IsEditable)
-			{
-				<MudButton OnClick="AddStunt">Add Stunt</MudButton>
-			}
-		</MudField>
+		<MudPaper Class="pa-8 mt-4">
+			<MudField Label="Stunts" Variant="Variant.Outlined">
+				@for (var i = 0; i < character.Stunts.Count; i++)
+				{
+					var localVariable = i;
+					<MudItem Class="d-flex">
+						<MudTextField @bind-Value="character.Stunts[localVariable].Description" ReadOnly="!IsEditable" />
+						@if (IsEditable)
+						{
+							<MudIconButton OnClick="@(() => character.Stunts.RemoveAt(localVariable))" Class="align-self-center"
+										 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+						}
+					</MudItem>
+				}
+				@if (IsEditable)
+				{
+					<MudButton OnClick="AddStunt">Add Stunt</MudButton>
+				}
+			</MudField>
+		</MudPaper>
 	}
 
 	@if (IsEditable || character.Extras.Count > 0)
 	{
-		<MudField Label="Extras" Variant="Variant.Outlined">
-			@for (var i = 0; i < character.Extras.Count; i++)
-			{
-				var localVariable = i;
-				<MudItem Class="d-flex">
-					<MudTextField @bind-Value="character.Extras[localVariable].Description" ReadOnly="!IsEditable" />
-					if (IsEditable)
-					{
-					<MudIconButton OnClick="@(() => character.Extras.RemoveAt(localVariable))" Class="align-self-center"
-									 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-					}
-				</MudItem>
-			}
-			@if (IsEditable)
-			{
-				<MudButton OnClick="AddExtra">Add Extra</MudButton>
-			}
-		</MudField>
+		<MudPaper Class="pa-8 mt-4">
+			<MudField Label="Extras" Variant="Variant.Outlined">
+				@for (var i = 0; i < character.Extras.Count; i++)
+				{
+					var localVariable = i;
+					<MudItem Class="d-flex">
+						<MudTextField @bind-Value="character.Extras[localVariable].Description" ReadOnly="!IsEditable" />
+						if (IsEditable)
+						{
+						<MudIconButton OnClick="@(() => character.Extras.RemoveAt(localVariable))" Class="align-self-center"
+										 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+						}
+					</MudItem>
+				}
+				@if (IsEditable)
+				{
+					<MudButton OnClick="AddExtra">Add Extra</MudButton>
+				}
+			</MudField>
+		</MudPaper>
 	}
 
-	<MudField Label="Stress" Variant="Variant.Outlined">
-		<MudGrid>
-			@foreach (var stressBar in character.StressBars)
-			{
-				<MudItem Class="my-auto" xs="3">
-					<MudText>@stressBar.Name</MudText>
-				</MudItem>
-				<MudItem xs="9" Class="d-flex">
-					@foreach (var stressBox in @stressBar.StressBoxes)
-					{
-						<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()" />
-					}
-					@if (IsEditable)
-					{
-						<MudButton Class="ml-auto" OnClick="(() => stressBar.AddBox())">Add box</MudButton>
-						<MudButton OnClick="(() => stressBar.RemoveBox())">Remove box</MudButton>
-					}
-				</MudItem>
-			}
-		</MudGrid>
-	</MudField>
+	<MudPaper Class="pa-8 mt-4">
+		<MudField Label="Stress" Variant="Variant.Outlined">
+			<MudGrid>
+				@foreach (var stressBar in character.StressBars)
+				{
+					<MudItem Class="my-auto" xs="3">
+						<MudText>@stressBar.Name</MudText>
+					</MudItem>
+					<MudItem xs="9" Class="d-flex">
+						@foreach (var stressBox in @stressBar.StressBoxes)
+						{
+							<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()" />
+						}
+						@if (IsEditable)
+						{
+							<MudButton Class="ml-auto" OnClick="(() => stressBar.AddBox())">Add box</MudButton>
+							<MudButton OnClick="(() => stressBar.RemoveBox())">Remove box</MudButton>
+						}
+					</MudItem>
+				}
+			</MudGrid>
+		</MudField>
+	</MudPaper>
 }
 
 @code {

@@ -1,83 +1,83 @@
 @page "/dice"
 
-<MudText Typo="Typo.body1">
-    
-    <p>
-        <MudGrid Spacing=2>
-            <MudItem xs=3>
-                <MudTextField @bind-Value="number" Label="Number of Dice" Variant="Variant.Outlined" />
-            </MudItem>
-            <MudItem xs=3>
-                <MudTextField @bind-Value="sides" Label="Sides per Die" Variant="Variant.Outlined" />
-            </MudItem>
-            <MudItem xs=3>
-                <MudTextField @bind-Value="offset" Label="Bonus to Result" Variant="Variant.Outlined" />
-            </MudItem>
-            <MudItem xs=3>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDice">Let's Roll!</MudButton>
-            </MudItem>
-        </MudGrid>
-        
-        <MudGrid Spacing=2>
-            <MudItem xs=9>
-                <MudField Variant="Variant.Outlined">
-                    Playing Fate or something similar?
-                </MudField>
-            </MudItem>
-            <MudItem xs=3>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollFudge">
-                    Let's Fudge!
-                </MudButton>
-            </MudItem>
-        </MudGrid>
+<MudPaper Class="pa-8">
+	<MudText Typo="Typo.body1">
+		<p>
+			<MudGrid Spacing=2>
+				<MudItem xs=3>
+					<MudTextField @bind-Value="number" Label="Number of Dice" Variant="Variant.Outlined" />
+				</MudItem>
+				<MudItem xs=3>
+					<MudTextField @bind-Value="sides" Label="Sides per Die" Variant="Variant.Outlined" />
+				</MudItem>
+				<MudItem xs=3>
+					<MudTextField @bind-Value="offset" Label="Bonus to Result" Variant="Variant.Outlined" />
+				</MudItem>
+				<MudItem xs=3>
+					<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollDice">Let's Roll!</MudButton>
+				</MudItem>
+			</MudGrid>
 
-        <MudGrid Spacing=2>
-            <MudItem xs=4>
-                <MudField Label="End Result" Variant="Variant.Outlined">@result</MudField>
-            </MudItem>
-            <MudItem xs=8>
-                <MudField Label="Dice Rolls" Variant="Variant.Outlined">@rolledRepresentation</MudField>
-            </MudItem>
-        </MudGrid>
-    </p>
-    
-</MudText>
+			<MudGrid Spacing=2>
+				<MudItem xs=9>
+					<MudField Variant="Variant.Outlined">
+						Playing Fate or something similar?
+					</MudField>
+				</MudItem>
+				<MudItem xs=3>
+					<MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="RollFudge">
+						Let's Fudge!
+					</MudButton>
+				</MudItem>
+			</MudGrid>
+
+			<MudGrid Spacing=2>
+				<MudItem xs=4>
+					<MudField Label="End Result" Variant="Variant.Outlined">@result</MudField>
+				</MudItem>
+				<MudItem xs=8>
+					<MudField Label="Dice Rolls" Variant="Variant.Outlined">@rolledRepresentation</MudField>
+				</MudItem>
+			</MudGrid>
+		</p>
+	</MudText>
+</MudPaper>
 
 
 @code
 {
-    private int number = 1;
-    private int sides = 6;
-    private int offset = 0;
-    private IEnumerable<int> rolled = null;
-    private string rolledRepresentation = "";
-    private int result = 0;
+	private int number = 1;
+	private int sides = 6;
+	private int offset = 0;
+	private IEnumerable<int> rolled = null;
+	private string rolledRepresentation = "";
+	private int result = 0;
 
-    private DiceRoller roller = new DiceRoller();
+	private DiceRoller roller = new DiceRoller();
 
-    private void RollDice()
-    {
-        rolled = roller.RollDice(number, sides);
-        result = rolled.Sum() + offset;
-        UpdateRepresentation();
-    }
+	private void RollDice()
+	{
+		rolled = roller.RollDice(number, sides);
+		result = rolled.Sum() + offset;
+		UpdateRepresentation();
+	}
 
-    private void RollFudge()
-    {
-        rolled = roller.RollFudge();
-        result = rolled.Sum() + offset;
-        UpdateRepresentation();
-    }
+	private void RollFudge()
+	{
+		rolled = roller.RollFudge();
+		result = rolled.Sum() + offset;
+		UpdateRepresentation();
+	}
 
-    private void UpdateRepresentation()
-    {
-        rolledRepresentation = rolled
-            .Skip(1)
-            .Select(i => i.ToString())
-            .Aggregate(
-                rolled.First().ToString(),
-                (concatenated, current) => 
-                    concatenated = concatenated + ", " + current
-            );
-    }
+	private void UpdateRepresentation()
+	{
+		rolledRepresentation = rolled
+				.Skip(1)
+				.Select(i => i.ToString())
+				.Aggregate(
+						rolled.First().ToString(),
+						(concatenated, current) =>
+								concatenated = concatenated + ", " + current
+				);
+	}
 }
