@@ -43,6 +43,21 @@ namespace Dorc.RoleplayingSystems.Base
 				{
 					builder.OpenComponent(0, CharacterSheetType);
 					builder.AddAttribute(1, "Character", Convert.ChangeType(character, CharacterType));
+					builder.AddAttribute(2, "IsEditable", false);
+					builder.CloseComponent();
+				}
+			};
+		}
+
+		public RenderFragment CreateEditableCharacterSheet(Character character)
+		{
+			return (builder) =>
+			{
+				if (CharacterSheetType is not null)
+				{
+					builder.OpenComponent(0, CharacterSheetType);
+					builder.AddAttribute(1, "Character", Convert.ChangeType(character, CharacterType));
+					builder.AddAttribute(2, "IsEditable", true);
 					builder.CloseComponent();
 				}
 			};

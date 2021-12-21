@@ -1,0 +1,16 @@
+﻿@page "/character/{characterUuid}/edit"
+@inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository
+
+@CharacterSheetFragment
+
+@code {
+	[Parameter] public string CharacterUuid { get; set; }
+
+	RenderFragment CharacterSheetFragment { get; set; }
+
+	protected override void OnParametersSet()
+	{
+		var character = characterRepository.Get(CharacterUuid);
+		CharacterSheetFragment = character.System.CreateEditableCharacterSheet(character);
+	}
+}

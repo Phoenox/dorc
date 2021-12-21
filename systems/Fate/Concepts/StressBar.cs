@@ -9,11 +9,22 @@ namespace Dorc.RoleplayingSystems.Fate
 
 		public StressBar(string name, int numberOfBoxes)
 		{
-			this.Name = name;
+			Name = name;
 			for (var i = 1; i <= numberOfBoxes; i++)
 			{
 				StressBoxes.Add(new StressBox(i));
 			}
+		}
+
+		public void AddBox()
+		{
+			var currentMaximum = StressBoxes.Count;
+			StressBoxes.Add(new StressBox(currentMaximum + 1));
+		}
+
+		public void RemoveBox()
+		{
+			StressBoxes.RemoveAt(StressBoxes.Count - 1);
 		}
 	}
 	public class StressBox

@@ -7,6 +7,7 @@
 
 @inject IDialogService DialogService
 @inject ILogger<Index> Logger
+@inject NavigationManager NavigationManager
 @inject Dorc.RoleplayingSystems.Base.ICharacterFactory characterFactory
 @inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository
 @inject Dorc.RoleplayingSystems.Base.IRoleplayingSystemRepository systemRepository
@@ -25,7 +26,7 @@
 	@foreach (var character in characters)
 	{
 		<MudItem xs="12">
-			<MudCard>
+			<MudCard @onclick="@(() => OpenCharacter(character))" Style="cursor: pointer;">
 				<MudCardHeader>
 					<CardHeaderAvatar>
 						<MudAvatar Image=@character.Portrait Style="height: 5rem; width: 5rem;" />
@@ -33,6 +34,12 @@
 					<CardHeaderContent>
 						<MudText Typo="Typo.h4">@character.Name</MudText>
 					</CardHeaderContent>
+					<CardHeaderActions>
+						<MudMenu Icon="@Icons.Material.Filled.MoreVert">
+							<MudMenuItem Link="@("character/" + character.Uuid + "/edit")">Edit</MudMenuItem>
+							<MudMenuItem OnClick="@(() => OpenDeleteCharacterDialog(character))">Delete</MudMenuItem>
+						</MudMenu>
+					</CardHeaderActions>
 				</MudCardHeader>
 				@if (!String.IsNullOrEmpty(character.Description))
 				{
@@ -40,14 +47,6 @@
 						<MudText Typo="Typo.body1">@character.Description</MudText>
 					</MudCardContent>
 				}
-				<MudCardActions>
-					<MudItem xs="12">
-						<MudItem Class="d-flex">
-							<MudButton Link="@("character/" + character.Uuid)" Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Visibility">Open</MudButton>
-							<MudButton Class="ml-auto" @onclick="@(() => OpenDeleteCharacterDialog(character))" Color="Color.Error" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
-						</MudItem>
-					</MudItem>
-				</MudCardActions>
 			</MudCard>
 		</MudItem>
 	}
@@ -81,6 +80,11 @@
 
 		if (!result.Cancelled)
 			UpdateCharacters();
+	}
+
+	private void OpenCharacter(Character character)
+	{
+		NavigationManager.NavigateTo($"character/{character.Uuid}");
 	}
 
 	private void UpdateCharacters()

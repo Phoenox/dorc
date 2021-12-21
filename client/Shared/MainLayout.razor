@@ -3,54 +3,54 @@
 @using Dorc.Shared;
 
 <MudLayout>
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleDrawer())" />
-        <MudSpacer />
-        @titlePart
-        <MudSpacer />
-        @actionPart
-    </MudAppBar>
-    <MudDrawer @bind-Open="isDrawerOpen" Elevation="2">
-        <MudDrawerHeader>
-            <img class="logo" src="images/logo.png"/>
-            <MudText Typo="Typo.h5" Class="mt-1 ml-4">D'Orc</MudText>
-        </MudDrawerHeader>
-        <MudNavMenu Class="mud-width-full">
-            <MudNavLink Href="" Icon="@Icons.Filled.Home" Match="NavLinkMatch.All">Home</MudNavLink>
-            <MudNavGroup Title="Modules" Icon="@Icons.Filled.ViewModule" Expanded="true">
-                <MudNavLink Href="characters" Icon="@Icons.Filled.Groups">Characters</MudNavLink>
-                <MudNavLink Href="dice" Icon="@Icons.Filled.Casino">Dice Roller</MudNavLink>
-            </MudNavGroup>
-            <MudNavLink Href="about" Icon="@Icons.Filled.Info">About</MudNavLink>
-        </MudNavMenu>
-    </MudDrawer>
-    <MudMainContent>
-	    <MudContainer Class="pa-8">
-		    <CascadingValue Value="this">
+	<MudAppBar Elevation="1">
+		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleDrawer())" />
+		<MudSpacer />
+		@titlePart
+		<MudSpacer />
+		@actionPart
+	</MudAppBar>
+	<MudDrawer @bind-Open="isDrawerOpen" Elevation="2">
+		<MudDrawerHeader>
+			<img class="logo" src="images/logo.png" />
+			<MudText Typo="Typo.h5" Class="mt-1 ml-4">D'Orc</MudText>
+		</MudDrawerHeader>
+		<MudNavMenu Class="mud-width-full">
+			<MudNavLink Href="" Icon="@Icons.Filled.Home" Match="NavLinkMatch.All">Home</MudNavLink>
+			<MudNavGroup Title="Modules" Icon="@Icons.Filled.ViewModule" Expanded="true">
+				<MudNavLink Href="characters" Icon="@Icons.Filled.Groups">Characters</MudNavLink>
+				<MudNavLink Href="dice" Icon="@Icons.Filled.Casino">Dice Roller</MudNavLink>
+			</MudNavGroup>
+			<MudNavLink Href="about" Icon="@Icons.Filled.Info">About</MudNavLink>
+		</MudNavMenu>
+	</MudDrawer>
+	<MudMainContent>
+		<MudContainer Class="pa-8">
+			<CascadingValue Value="this">
 				@Body
-		    </CascadingValue>
-	    </MudContainer>
-    </MudMainContent>
+			</CascadingValue>
+		</MudContainer>
+	</MudMainContent>
 </MudLayout>
 
 @code {
-    RenderFragment titlePart => appBar?.Title;
-    RenderFragment actionPart => appBar?.Actions;
+	RenderFragment titlePart => appBar?.Title;
+	RenderFragment actionPart => appBar?.Actions;
 
-    ContextualAppBar appBar;
+	ContextualAppBar appBar;
 
-    public void SetContextualAppBar(ContextualAppBar appBar)
-    {
-        this.appBar = appBar;
+	public void SetContextualAppBar(ContextualAppBar appBar)
+	{
+		this.appBar = appBar;
 		Update();
 	}
 
 	public void Update() => StateHasChanged();
 
-    bool isDrawerOpen = true;
+	bool isDrawerOpen = true;
 
-    void ToggleDrawer()
-    {
-        isDrawerOpen = !isDrawerOpen;
-    }
+	void ToggleDrawer()
+	{
+		isDrawerOpen = !isDrawerOpen;
+	}
 }
