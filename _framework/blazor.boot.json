@@ -7,13 +7,13 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Base.dll": "sha256-iVPtz3Jh7VuNV31ipi\/eoFPQ6z\/56\/tNswaIyuSQIHk=",
+      "Base.dll": "sha256-Ghnl8HSa1W45BkI2SxzbWRLEfHBN6zrrEE8ijqgllDg=",
       "Blazored.LocalStorage.dll": "sha256-ItMv+HytRb8SgPKYiz75PK0k+DFgN1E247PZT\/8lODs=",
-      "Characters.View.dll": "sha256-mhOEZirN2TEmeBlZa72GVTlKGVEIWT8Q0\/HziOGClE8=",
-      "CoreWarrior.dll": "sha256-\/YmFdIhHXGdWtRTp9Vf+lEVPrUbv6vpHNS3zSapI5T0=",
+      "Characters.View.dll": "sha256-GkLwtcfToXbrcyTImEXLXe2ypnK4tt46IaDKWjiOZic=",
+      "CoreWarrior.dll": "sha256-6MF9oQQeWKR7udpNkvL0kswD4URctcZPQgjhbgTf5wU=",
       "dice.dll": "sha256-YypwAK7dDnN3p3XlrnlRzqclOvw4xecJtP4gzF7aIZk=",
-      "Dorc.Client.dll": "sha256-GY1AJ+lzplIXyTTgsbFMsPqf\/2cAOBXiFoEvWPQbipM=",
-      "Fate.dll": "sha256-KyTvcAMU2RfF7K3M\/hGfiOPEwKiPPtawNtvbd2+cGXQ=",
+      "Dorc.Client.dll": "sha256-6iWac7XFRzNnuk5N4SxAgtiqm9aM61tzW5c4\/RY9fu4=",
+      "Fate.dll": "sha256-CiF4fAf5cr8wdHtFfqhd3enZRY8+Q\/km7lZHLNLGTSE=",
       "FSharp.Core.dll": "sha256-BOwC8iZSjmycG4FImpUJWPu8AgN8j\/5CKJvLARyZo7I=",
       "Microsoft.AspNetCore.Components.dll": "sha256-73XVTyMvcZt6MCrPXyKsra97Lw59VpsfHk7nZEXV+E0=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-99xQLNB0SDAd0qQmmfqjiPAR5kgM7yr0dRSXmADR75c=",
