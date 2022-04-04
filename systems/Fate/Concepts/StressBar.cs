@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Dorc.RoleplayingSystems.Fate
 {
@@ -7,10 +9,27 @@ namespace Dorc.RoleplayingSystems.Fate
 		public string Name { get; set; }
 		public List<StressBox> StressBoxes { get; } = new List<StressBox>();
 
+		[JsonConstructor]
 		public StressBar(string name, int numberOfBoxes)
 		{
 			Name = name;
 			for (var i = 1; i <= numberOfBoxes; i++)
+			{
+				StressBoxes.Add(new StressBox(i));
+			}
+		}
+
+		public StressBar(StressBar oldBar, int numberOfBoxes)
+		{
+			Name = oldBar.Name;
+			var commonBoxes = Math.Min(numberOfBoxes, oldBar.StressBoxes.Count);
+			for (var i = 1; i <= commonBoxes; i++)
+			{
+				StressBoxes.Add(new StressBox(oldBar.StressBoxes[i]));
+			}
+
+			var remainingBoxes = numberOfBoxes - commonBoxes;
+			for (var i = 1; i <= commonBoxes; i++)
 			{
 				StressBoxes.Add(new StressBox(i));
 			}
@@ -32,9 +51,16 @@ namespace Dorc.RoleplayingSystems.Fate
 		public int Value { get; }
 		public bool IsChecked { get; set; }
 
+		[JsonConstructor]
 		public StressBox(int value)
 		{
 			this.Value = value;
+		}
+
+		public StressBox(StressBox oldBox)
+		{
+			this.Value = oldBox.Value;
+			this.IsChecked = oldBox.IsChecked;
 		}
 	}
 }

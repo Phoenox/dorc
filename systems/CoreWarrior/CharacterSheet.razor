@@ -1,5 +1,5 @@
 ﻿@using Dorc.RoleplayingSystems.CoreWarrior;
-//@using Dorc.RoleplayingSystems.Base.Concepts;
+@using Dorc.RoleplayingSystems.Base.Concepts;
 @inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository;
 
 @if (character is null)
@@ -91,7 +91,7 @@ else
 			<MudButton OnClick="AddExtra">Add Extra</MudButton>
 		</MudField>
 
-		<MudField Label="Stress" Variant="Variant.Outlined">
+		<MudField Label="💪 Stress" Variant="Variant.Outlined">
 			<MudGrid>
 				@foreach (var stressBar in character.Stats.StressBars)
 				{
@@ -110,6 +110,52 @@ else
 
 	</EditForm>
 	
+	<MudField Label="Mech" Variant="Variant.Outlined">
+		
+		<MudField Label="Aspects" Variant="Variant.Outlined">
+			<!--MudTextField Label="Class" @bind-Value="character.Mech.Class" For="@(() => character.Mech.Class)"/-->
+			<MudSelect T="MechClass" Label="Class" AnchorOrigin="Origin.BottomCenter" @bind-Value="character.Mech.Class">
+                <MudSelectItem Value="@(MechClass.Light)" />
+                <MudSelectItem Value="@(MechClass.Medium)" />
+                <MudSelectItem Value="@(MechClass.Heavy)" />
+                <MudSelectItem Value="@(MechClass.Assault)" />
+                <MudSelectItem Value="@(MechClass.Other)" />
+            </MudSelect>
+			<MudTextField Label="Description" @bind-Value="character.Stats.Dilemma" For="@(() => character.Mech.Description)"/>
+			@for (var i = 0; i < character.Mech.Aspects.Count; i++)
+			{
+				var mechAspectIndex = i;
+				<MudItem Class="d-flex">
+					<MudTextField @bind-Value="character.Mech.Aspects[mechAspectIndex]"/>
+					<MudIconButton OnClick="@(() => character.Mech.Aspects.RemoveAt(mechAspectIndex))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete"/>
+				</MudItem>
+			}
+			<MudButton OnClick="AddMechAspect">Add Aspect</MudButton>
+		</MudField>
+
+		
+		<MudField Label="Stress" Variant="Variant.Outlined">
+			<MudGrid>
+				<MudItem Class="my-auto" xs="3">
+					<MudText Typo="Typo.h6">🛡️ Physical Stress</MudText>
+				</MudItem>
+				<MudItem xs="9">
+					@foreach (var stressBox in @character.Mech.PhysicalStress.StressBoxes)
+					{
+						<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()"/>
+					}
+				</MudItem>
+				
+				<MudItem xs="3">
+					<MudText Typo="Typo.h6">🔥 Heat Dissipation</MudText>
+				</MudItem>
+				<MudItem xs="9">
+                    @character.Mech.HeatDissipation
+                </MudItem>
+			</MudGrid>
+		</MudField>
+	</MudField>
+	
 }
 
 @code {
@@ -120,6 +166,11 @@ else
 		character?.Stats 
 		??
 		new Dorc.RoleplayingSystems.Fate.Core.Character();
+	
+	// public Dorc.RoleplayingSystems.CoreWarrior.Mech mech => 
+	// 	character?.Mech 
+	// 	??
+	// 	new Dorc.RoleplayingSystems.CoreWarrior.Mech();
 
 	void Save()
 	{
@@ -130,6 +181,11 @@ else
 	void AddAspect()
 	{
 		character?.Stats.Aspects.Add(string.Empty);
+	}
+	
+	void AddMechAspect()
+	{
+		character?.Mech.Aspects.Add(string.Empty);
 	}
 
 	void AddExtra()
