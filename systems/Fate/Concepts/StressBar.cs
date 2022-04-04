@@ -7,7 +7,7 @@ namespace Dorc.RoleplayingSystems.Fate
 	public class StressBar
 	{
 		public string Name { get; set; }
-		public List<StressBox> StressBoxes { get; } = new List<StressBox>();
+		public List<StressBox> StressBoxes { get; } = new();
 
 		[JsonConstructor]
 		public StressBar(string name, int numberOfBoxes)
@@ -23,13 +23,13 @@ namespace Dorc.RoleplayingSystems.Fate
 		{
 			Name = oldBar.Name;
 			var commonBoxes = Math.Min(numberOfBoxes, oldBar.StressBoxes.Count);
-			for (var i = 1; i <= commonBoxes; i++)
+			for (var i = 0; i < commonBoxes; i++)
 			{
 				StressBoxes.Add(new StressBox(oldBar.StressBoxes[i]));
 			}
 
 			var remainingBoxes = numberOfBoxes - commonBoxes;
-			for (var i = 1; i <= commonBoxes; i++)
+			for (var i = 0; i < remainingBoxes; i++)
 			{
 				StressBoxes.Add(new StressBox(i));
 			}

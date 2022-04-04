@@ -113,15 +113,17 @@ else
 	<MudField Label="Mech" Variant="Variant.Outlined">
 		
 		<MudField Label="Aspects" Variant="Variant.Outlined">
-			<!--MudTextField Label="Class" @bind-Value="character.Mech.Class" For="@(() => character.Mech.Class)"/-->
-			<MudSelect T="MechClass" Label="Class" AnchorOrigin="Origin.BottomCenter" @bind-Value="character.Mech.Class">
-                <MudSelectItem Value="@(MechClass.Light)" />
-                <MudSelectItem Value="@(MechClass.Medium)" />
-                <MudSelectItem Value="@(MechClass.Heavy)" />
-                <MudSelectItem Value="@(MechClass.Assault)" />
-                <MudSelectItem Value="@(MechClass.Other)" />
-            </MudSelect>
-			<MudTextField Label="Description" @bind-Value="character.Stats.Dilemma" For="@(() => character.Mech.Description)"/>
+			<MudGrid>
+				<MudItem Class="my-auto" xs="3">
+					<MudTextField Label="Tonnage" @bind-Value="character.Mech.Tonnage" For="@(() => character.Mech.Tonnage)"/>
+				</MudItem>
+				
+				<MudItem Class="my-auto" xs="9">
+					<MudTextField Label="Class" @bind-Value="character.Mech.Class" Disabled="true"/>
+				</MudItem>
+			</MudGrid>
+			
+			<MudTextField Label="Description" @bind-Value="character.Mech.Description" For="@(() => character.Mech.Description)"/>
 			@for (var i = 0; i < character.Mech.Aspects.Count; i++)
 			{
 				var mechAspectIndex = i;

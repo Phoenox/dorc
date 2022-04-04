@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using Dorc.RoleplayingSystems.Fate;
+using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Extensions;
 
 namespace Dorc.RoleplayingSystems.CoreWarrior
@@ -9,7 +10,13 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 	public class Mech
 	{
 		public string Description { get; set; } = "";
-		public int Tonnage { get; set; } = 0;
+		private int _tonnage = 50;
+
+		public int Tonnage
+		{
+			get => _tonnage; 
+			set => this.SetTonnage(value);
+		}
 
 		private MechClass _class;
 		public MechClass Class
@@ -25,17 +32,33 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 
 		public Mech()
 		{
-			this.Class = RoleplayingSystem.MechClassByTonnage(this.Tonnage);
+			this.Class = ClassFromTonnage(this.Tonnage);
 		}
 
+		private void SetTonnage(int tons)
+		{
+			this._tonnage = tons;
+			this.Class = ClassFromTonnage(tons);
+		}
+		
 		private void SetClass(MechClass clazz)
 		{
 			this._class = clazz;
 			if (clazz != MechClass.Other)
 			{
-				var newCapacity = 2 + clazz.As<int>();
-				this.PhysicalStress = new StressBar(this.PhysicalStress, newCapacity);
+				UpdateStressBarToFitClass();
 			}
+		}
+
+		private void UpdateStressBarToFitClass()
+		{
+			var newCapacity = 2 + (int) this.Class;
+			this.PhysicalStress = new StressBar(this.PhysicalStress, newCapacity);
+		}
+		
+		private MechClass ClassFromTonnage(int tons)
+		{
+			return RoleplayingSystem.MechClassByTonnage(tons);
 		}
 	}
 
