@@ -53,7 +53,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-JUipAjp1lshbZuvzxlyHNjle5OUnH\/qClmtFzJ7W+xA=",
+      "hash": "sha256-zdj5HNBqwJh3VQVM4H9M60Knz3Y2EDqQPVSVEkiGmy0=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -69,7 +69,7 @@
       "url": "_framework\/Characters.View.dll"
     },
     {
-      "hash": "sha256-YeB8agb9rhy9Pa5IvyIBwm\/0SISm5iKStyX5jyMA89I=",
+      "hash": "sha256-UcQeFyxLJhWLcH68wA2RPVbxiSHDYnN+8\/RzOKKV9eM=",
       "url": "_framework\/CoreWarrior.dll"
     },
     {
@@ -77,11 +77,11 @@
       "url": "_framework\/dice.dll"
     },
     {
-      "hash": "sha256-59clTYWzB4teZJVnnoAqmbhtdTf5z9Dh7Y+U6dPUfUc=",
+      "hash": "sha256-3T7MttWrSNrpxUyi3sO2K1vnUZM3ljPbStlwwzIq9ZU=",
       "url": "_framework\/Dorc.Client.dll"
     },
     {
-      "hash": "sha256-yrXYoZ1YrhnNirdjgD4f3x\/wEikYSfyVyWVkLV4UGFQ=",
+      "hash": "sha256-l3YrteivD5DwCAs1y+bqbkjCITLFRIzU9+3TEgmg9IY=",
       "url": "_framework\/Fate.dll"
     },
     {
@@ -405,5 +405,5 @@
       "url": "_content\/Characters.View\/Characters.View.bundle.scp.css"
     }
   ],
-  "version": "BBva7I1I"
+  "version": "FZOCC2Oh"
 };
