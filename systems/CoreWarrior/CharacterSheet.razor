@@ -1,6 +1,10 @@
 ﻿@using Dorc.RoleplayingSystems.CoreWarrior;
 @using Dorc.RoleplayingSystems.Base.Concepts;
+@using Microsoft.Extensions.Logging
+@using Microsoft.JSInterop
 @inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository;
+@inject IJSRuntime JS;
+@inject ILogger<Index> Logger;
 
 @if (character is null)
 {
@@ -8,6 +12,28 @@
 }
 else
 {
+	<ContextualAppBar>
+		<Title>
+			<MudText Typo="Typo.h4">@character.Name</MudText>
+		</Title>
+		<Actions>
+			@if (IsEditable)
+			{
+				<MudButton OnClick="Save" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Inherit">
+					Save
+				</MudButton>
+			}
+			else
+			{
+				<MudButton Link="@("character/" + character.Uuid + "/edit")" StartIcon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Color="Color.Inherit">
+					Edit
+				</MudButton>
+			}
+			<MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit">
+				<MudMenuItem OnClick="ExportCharacter">Export...</MudMenuItem>
+			</MudMenu>
+		</Actions>
+	</ContextualAppBar>
 	
 	<EditForm Model="character" OnValidSubmit="Save">
 		
@@ -268,5 +294,11 @@ else
 			string imageType = imageSource.ContentType;
 			character.Mech.Image = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
 		}
+	}
+	
+	void ExportCharacter()
+	{
+		if (character is not null)
+			Dorc.RoleplayingSystems.Base.CharacterSerialization.ExportCharacter(character, JS, Logger);
 	}
 }
