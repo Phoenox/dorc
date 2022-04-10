@@ -44,12 +44,12 @@ else
 
 		<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*"/>
 
-		<MudItem Class="d-flex">
+		<MudItem Class="d-sm-flex">
             <MudItem Class="flex-grow-1">
             	<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" ReadOnly="!IsEditable" />
             	<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" ReadOnly="!IsEditable" />
             </MudItem>
-            <MudItem>
+            <MudItem Class="object-bottom">
             	<MudButton HtmlTag="label" for="portraitUpload" Disabled="!IsEditable">
             		<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
             	</MudButton>
@@ -193,19 +193,19 @@ else
 
 		<InputFile id="mechImageUpload" OnChange="UploadMechImage" hidden accept="image/*"/>
 		
-		<MudItem Class="d-flex">
+		<MudItem Class="d-sm-flex">
             <MudItem Class="flex-grow-1">
                 <MudTextField Label="Name" @bind-Value="character.Mech.Name" For="@(() => character.Mech.Name)" ReadOnly="!IsEditable" />
                 <MudTextField Label="Description" @bind-Value="character.Mech.Description" For="@(() => character.Mech.Description)" ReadOnly="!IsEditable" />
 				<MudGrid>
-					<MudItem Class="d-flex" xs="1">
+					<MudItem Class="flex-grow-1">
 	                    <MudTextField Label="Tonnage" @bind-Value="character.Mech.Tonnage" For="@(() => character.Mech.Tonnage)" ReadOnly="!IsEditable"/>
 	                </MudItem>
 
-					<MudItem Class="d-flex" xs="2">
+					<MudItem Class="flex-grow-1">
 						<MudTextField Label="Class" @bind-Value="character.Mech.Class" ReadOnly="true"/>
 					</MudItem>
-					<MudItem Class="d-flex" xs="1">
+					<MudItem Class="flex-grow-1">
                     	<MudTextField Label="Weapon Slots" @bind-Value="character.Mech.WeaponSlots" ReadOnly="true"/>
                     </MudItem>
 				</MudGrid>
