@@ -1,15 +1,16 @@
 ﻿@using Dorc.RoleplayingSystems.CoreWarrior;
 @using Dorc.RoleplayingSystems.Base.Concepts;
-@using Microsoft.Extensions.Logging
-@using Microsoft.JSInterop
+@using Dorc.Shared;
+@using Microsoft.Extensions.Logging;
+@using Microsoft.JSInterop;
+
 @inject Dorc.RoleplayingSystems.Base.ICharacterRepository characterRepository;
 @inject IJSRuntime JS;
 @inject ILogger<Index> Logger;
 @inject NavigationManager NavigationManager;
 
 
-@if (character is null)
-{
+@if (character is null) {
 	<MudText>Loading...</MudText>
 }
 else
@@ -37,54 +38,46 @@ else
 		</Actions>
 	</ContextualAppBar>
 	
-	<MudPaper Model="character" OnValidSubmit="Save">
-		
-		<MudPaper Class="pa-8">
+	<MudPaper Class="pa-8">
 
-			<MudToolBar>
-				<MudText Typo="Typo.h3">Warrior</MudText>
-				<MudSpacer/>
-				<MudButton Link="characters">Cancel</MudButton>
-				<MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Save</MudButton>
-			</MudToolBar>
+		<MudText Typo="Typo.h4">Warrior Data</MudText>
 
-			<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*"/>
+		<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*"/>
 
-			<MudItem Class="d-flex">
-            	<MudItem Class="flex-grow-1">
-            		<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" ReadOnly="!IsEditable" />
-            		<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" ReadOnly="!IsEditable" />
-            	</MudItem>
-            	<MudItem>
-            		<MudButton HtmlTag="label" for="portraitUpload" Disabled="!IsEditable">
-            			<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
-            		</MudButton>
-            	</MudItem>
+		<MudItem Class="d-flex">
+            <MudItem Class="flex-grow-1">
+            	<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" ReadOnly="!IsEditable" />
+            	<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" ReadOnly="!IsEditable" />
             </MudItem>
-		
+            <MudItem>
+            	<MudButton HtmlTag="label" for="portraitUpload" Disabled="!IsEditable">
+            		<MudAvatar Image="@character.Portrait" Style="height: 10rem; width: 10rem;" />
+            	</MudButton>
+            </MudItem>
+        </MudItem>
+	
 
-			<MudField Label="Aspects" Variant="Variant.Outlined">
-            			<MudTextField Label="High Concept" @bind-Value="character.Core.HighConcept" For="@(() => character.Core.HighConcept)" ReadOnly="!IsEditable" />
-            			<MudTextField Label="Dilemma" @bind-Value="character.Core.Dilemma" For="@(() => character.Core.Dilemma)" ReadOnly="!IsEditable" />
-            @for (var i = 0; i < character.Core.Aspects.Count; i++)
-            {
-            	var localVariable = i;
-            	<MudItem Class="d-flex">
-            		<MudTextField @bind-Value="character.Core.Aspects[localVariable]" ReadOnly="!IsEditable" />
-            		@if (IsEditable)
-            		{
-            			<MudIconButton OnClick="@(() => character.Core.Aspects.RemoveAt(localVariable))" Class="align-self-center"
-            							 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-            		}
-            	</MudItem>
-            }
-            @if (IsEditable)
-            {
-            	<MudButton OnClick="AddAspect">Add Aspect</MudButton>
-            }
-        </MudField>
-		</MudPaper>
-	</MudPaper>
+		<MudField Label="Aspects" Variant="Variant.Outlined">
+        <MudTextField Label="High Concept" @bind-Value="character.Core.HighConcept" For="@(() => character.Core.HighConcept)" ReadOnly="!IsEditable" />
+        <MudTextField Label="Dilemma" @bind-Value="character.Core.Dilemma" For="@(() => character.Core.Dilemma)" ReadOnly="!IsEditable" />
+        @for (var i = 0; i < character.Core.Aspects.Count; i++)
+        {
+            var localVariable = i;
+            <MudItem Class="d-flex">
+            	<MudTextField @bind-Value="character.Core.Aspects[localVariable]" ReadOnly="!IsEditable" />
+            	@if (IsEditable)
+            	{
+            		<MudIconButton OnClick="@(() => character.Core.Aspects.RemoveAt(localVariable))" Class="align-self-center"
+            						 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+            	}
+            </MudItem>
+        }
+        @if (IsEditable)
+        {
+            <MudButton OnClick="AddAspect">Add Aspect</MudButton>
+        }
+		</MudField>
+	
 
 	@if (IsEditable || character.Core.Skills.Count > 0)
 	{
@@ -141,124 +134,151 @@ else
 				</RowTemplate>
 			</MudTable>
 		</MudPaper>
-	}
-
-	<MudPaper>			
-		@if (IsEditable || character.Core.Stunts.Count > 0)
-        	{
-        		<MudPaper Class="pa-8 mt-4">
-        			<MudField Label="Stunts" Variant="Variant.Outlined">
-        				@for (var i = 0; i < character.Core.Stunts.Count; i++)
-        				{
-        					var localVariable = i;
-        					<MudItem Class="d-flex">
-        						<MudTextField @bind-Value="character.Core.Stunts[localVariable].Description" ReadOnly="!IsEditable" />
-        						@if (IsEditable)
-        						{
-        							<MudIconButton OnClick="@(() => character.Core.Stunts.RemoveAt(localVariable))" Class="align-self-center"
-        										 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-        						}
-        					</MudItem>
-        				}
-        				@if (IsEditable)
-        				{
-        					<MudButton OnClick="AddStunt">Add Stunt</MudButton>
-        				}
-        			</MudField>
-        		</MudPaper>
-        	}
+	}		
 		
-		@if (IsEditable || character.Core.Extras.Count > 0)
-        	{
-        		<MudPaper Class="pa-8 mt-4">
-        			<MudField Label="Extras" Variant="Variant.Outlined">
-        				@for (var i = 0; i < character.Core.Extras.Count; i++)
-        				{
-        					var localVariable = i;
-        					<MudItem Class="d-flex">
-        						<MudTextField @bind-Value="character.Core.Extras[localVariable].Description" ReadOnly="!IsEditable" />
-        						if (IsEditable)
-        						{
-        						<MudIconButton OnClick="@(() => character.Core.Extras.RemoveAt(localVariable))" Class="align-self-center"
-        										 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
-        						}
-        					</MudItem>
-        				}
-        				@if (IsEditable)
-        				{
-        					<MudButton OnClick="AddExtra">Add Extra</MudButton>
-        				}
-        			</MudField>
-        		</MudPaper>
-        	}
-		</MudPaper>
+		@if (IsEditable || character.Core.Stunts.Count > 0)
+        {
+        	<MudPaper Class="mt-4">
+        		<MudField Label="Stunts" Variant="Variant.Outlined">
+        			@for (var i = 0; i < character.Core.Stunts.Count; i++)
+        			{
+        				var localVariable = i;
+        				<MudItem Class="d-flex">
+        					<MudTextField @bind-Value="character.Core.Stunts[localVariable].Description" ReadOnly="!IsEditable" />
+        					@if (IsEditable)
+        					{
+        						<MudIconButton OnClick="@(() => character.Core.Stunts.RemoveAt(localVariable))" Class="align-self-center"
+        									 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+        					}
+        				</MudItem>
+        			}
+        			@if (IsEditable)
+        			{
+        				<MudButton OnClick="AddStunt">Add Stunt</MudButton>
+        			}
+        		</MudField>
+        	</MudPaper>
+        }
 	
-	<MudPaper>
+	@if (IsEditable || character.Core.Extras.Count > 0)
+        {
+        	<MudPaper Class="mt-4">
+        		<MudField Label="Extras" Variant="Variant.Outlined">
+        			@for (var i = 0; i < character.Core.Extras.Count; i++)
+        			{
+        				var localVariable = i;
+        				<MudItem Class="d-flex">
+        					<MudTextField @bind-Value="character.Core.Extras[localVariable].Description" ReadOnly="!IsEditable" />
+        					@if (IsEditable)
+        					{
+        					<MudIconButton OnClick="@(() => character.Core.Extras.RemoveAt(localVariable))" Class="align-self-center"
+        									 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+        					}
+        				</MudItem>
+        			}
+        			@if (IsEditable)
+        			{
+        				<MudButton OnClick="AddExtra">Add Extra</MudButton>
+        			}
+        		</MudField>
+        	</MudPaper>
+        }
+	</MudPaper>
+	
+	<MudPaper Class="pa-8 mt-4">
 
-		<MudField Label="Mech" Variant="Variant.Filled" Style="@($"background-color: {Theme.Palette.Secondary}; color: {Theme.Palette.Secondary}")">
+		<!--MudField Label="Mech" Variant="Variant.Filled" Style="@($"background-color: {Theme.Palette.Secondary}; color: {Theme.Palette.Secondary}")"-->
 
-			<MudText Typo="Typo.h3">Mech</MudText>
+		<MudText Typo="Typo.h4">Mech Data</MudText>
 
-			<InputFile id="mechImageUpload" OnChange="UploadMechImage" hidden accept="image/*"/>
+		<InputFile id="mechImageUpload" OnChange="UploadMechImage" hidden accept="image/*"/>
+		
+		<MudItem Class="d-flex">
+            <MudItem Class="flex-grow-1">
+                <MudTextField Label="Name" @bind-Value="character.Mech.Name" For="@(() => character.Mech.Name)" ReadOnly="!IsEditable" />
+                <MudTextField Label="Description" @bind-Value="character.Mech.Description" For="@(() => character.Mech.Description)" ReadOnly="!IsEditable" />
+				<MudGrid>
+					<MudItem Class="d-flex" xs="1">
+	                    <MudTextField Label="Tonnage" @bind-Value="character.Mech.Tonnage" For="@(() => character.Mech.Tonnage)" ReadOnly="!IsEditable"/>
+	                </MudItem>
 
+					<MudItem Class="d-flex" xs="2">
+						<MudTextField Label="Class" @bind-Value="character.Mech.Class" ReadOnly="true"/>
+					</MudItem>
+					<MudItem Class="d-flex" xs="1">
+                    	<MudTextField Label="Weapon Slots" @bind-Value="character.Mech.WeaponSlots" ReadOnly="true"/>
+                    </MudItem>
+				</MudGrid>
+            </MudItem>
+            <MudItem>
+                <MudButton HtmlTag="label" for="mechImageUpload" Disabled="!IsEditable">
+                    <MudAvatar Image="@character.Mech.Image" Style="height: 10rem; width: 10rem;" />
+                </MudButton>
+            </MudItem>
+        </MudItem>
+
+		<MudField Label="Aspects" Variant="Variant.Outlined">
+            <MudTextField Label="High Concept" @bind-Value="character.Mech.HighConcept" For="@(() => character.Mech.HighConcept)" ReadOnly="!IsEditable" />
+            <MudTextField Label="Dilemma" @bind-Value="character.Mech.Trouble" For="@(() => character.Mech.Trouble)" ReadOnly="!IsEditable" />
+            @for (var i = 0; i < character.Mech.Aspects.Count; i++)
+            {
+                var mechAspectIndex = i;
+                <MudItem Class="d-flex">
+                    <MudTextField @bind-Value="character.Mech.Aspects[mechAspectIndex]" ReadOnly="!IsEditable" />
+                    @if (IsEditable)
+                    {
+                        <MudIconButton OnClick="@(() => character.Mech.Aspects.RemoveAt(mechAspectIndex))" Class="align-self-center"
+                        				 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+                    }
+                </MudItem>
+            }
+            @if (IsEditable)
+            {
+                <MudButton OnClick="AddMechAspect">Add Aspect</MudButton>
+            }
+        </MudField>
+
+		@if (IsEditable || character.Mech.Equipment.Count > 0)
+        	{
+        		<MudField Label="Equipment" Variant="Variant.Outlined">
+        			@for (var i = 0; i < character.Mech.Equipment.Count; i++)
+        			{
+        				var localVariable = i;
+        				<MudItem Class="d-flex">
+        					<MudTextField @bind-Value="character.Mech.Equipment[localVariable].Description" ReadOnly="!IsEditable" />
+        					@if (IsEditable)
+        					{
+        					<MudIconButton OnClick="@(() => character.Mech.Equipment.RemoveAt(localVariable))" Class="align-self-center"
+        									 Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete" />
+        					}
+        				</MudItem>
+        			}
+        			@if (IsEditable)
+        			{
+        				<MudButton OnClick="AddMechEquipment">Add Equipment</MudButton>
+        			}
+        		</MudField>
+        	}
+
+		<MudField Label="Stress" Variant="Variant.Outlined">
 			<MudGrid>
-				<MudItem xs=10>
-					<MudTextField Label="Name" @bind-Value="character.Mech.Name" For="@(() => character.Mech.Name)"/>
-					<MudTextField Label="Description" @bind-Value="character.Mech.Description" For="@(() => character.Mech.Description)"/>
-					<MudTextField Label="High Concept" @bind-Value="character.Mech.HighConcept" For="@(() => character.Mech.HighConcept)"/>
-					<MudTextField Label="Trouble" @bind-Value="character.Mech.Trouble" For="@(() => character.Mech.Trouble)"/>
-					<MudGrid>
-						<MudItem Class="my-auto" xs="3">
-							<MudTextField Label="Tonnage" @bind-Value="character.Mech.Tonnage" For="@(() => character.Mech.Tonnage)"/>
-						</MudItem>
-
-						<MudItem Class="my-auto" xs="9">
-							<MudTextField Label="Class" @bind-Value="character.Mech.Class" Disabled="true"/>
-						</MudItem>
-					</MudGrid>
+				<MudItem Class="my-auto" xs="3">
+					<MudText Typo="Typo.h6">🛡️ Physical Stress</MudText>
+				</MudItem>
+				<MudItem xs="9">
+					@foreach (var stressBox in @character.Mech.PhysicalStress.StressBoxes)
+					{
+						<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()"/>
+					}
 				</MudItem>
 
-				<MudItem xs=2>
-					<MudButton HtmlTag="label" for="mechImageUpload">
-						<MudAvatar Image="@character.Mech.Image" Style="height: 10rem; width: 10rem;"/>
-					</MudButton>
+				<MudItem xs="3">
+					<MudText Typo="Typo.h6">🔥 Heat Dissipation</MudText>
+				</MudItem>
+				<MudItem xs="9">
+					@character.Mech.HeatDissipation
 				</MudItem>
 			</MudGrid>
-
-			<MudField Label="Aspects" Variant="Variant.Outlined">
-
-				@for (var i = 0; i < character.Mech.Aspects.Count; i++)
-				{
-					var mechAspectIndex = i;
-					<MudItem Class="d-flex">
-						<MudTextField @bind-Value="character.Mech.Aspects[mechAspectIndex]"/>
-						<MudIconButton OnClick="@(() => character.Mech.Aspects.RemoveAt(mechAspectIndex))" Class="align-self-center" Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" aria-label="delete"/>
-					</MudItem>
-				}
-				<MudButton OnClick="AddMechAspect">Add Aspect</MudButton>
-			</MudField>
-
-
-			<MudField Label="Stress" Variant="Variant.Outlined">
-				<MudGrid>
-					<MudItem Class="my-auto" xs="3">
-						<MudText Typo="Typo.h6">🛡️ Physical Stress</MudText>
-					</MudItem>
-					<MudItem xs="9">
-						@foreach (var stressBox in @character.Mech.PhysicalStress.StressBoxes)
-						{
-							<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()"/>
-						}
-					</MudItem>
-
-					<MudItem xs="3">
-						<MudText Typo="Typo.h6">🔥 Heat Dissipation</MudText>
-					</MudItem>
-					<MudItem xs="9">
-						@character.Mech.HeatDissipation
-					</MudItem>
-				</MudGrid>
-			</MudField>
 		</MudField>
 	</MudPaper>
 	
@@ -316,9 +336,9 @@ else
 		character?.Core.Stunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
 	}
 
-	void AddMechStunt()
+	void AddMechEquipment()
 	{
-		character?.MechStunts.Add(new Dorc.RoleplayingSystems.Fate.Stunt());
+		character?.Mech.Equipment.Add(new Dorc.RoleplayingSystems.CoreWarrior.Equipment());
 	}
 
 	async Task UploadPortrait(InputFileChangeEventArgs args)

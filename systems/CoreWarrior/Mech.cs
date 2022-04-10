@@ -20,6 +20,7 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 			get => _tonnage; 
 			set => this.SetTonnage(value);
 		}
+		public int WeaponSlots;
 
 		private MechClass _class;
 		public MechClass Class
@@ -27,6 +28,7 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 			get => _class; 
 			set => this.SetClass(value);
 		}
+
 		public List<string> Aspects { get; } = new();
 		public List<Equipment> Equipment { get; } = new();
 		public int HeatDissipation { get; set; } = 5;
@@ -51,6 +53,7 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 			if (clazz != MechClass.Other)
 			{
 				UpdateStressBarToFitClass();
+				this.WeaponSlots = 3 + (int) this.Class;
 			}
 		}
 

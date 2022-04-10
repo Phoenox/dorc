@@ -27,9 +27,8 @@ namespace Dorc.RoleplayingSystems.Fate
 			{
 				StressBoxes.Add(new StressBox(oldBar.StressBoxes[i]));
 			}
-
-			var remainingBoxes = numberOfBoxes - commonBoxes;
-			for (var i = 0; i < remainingBoxes; i++)
+			
+			for (var i = commonBoxes + 1; i <= numberOfBoxes; i++)
 			{
 				StressBoxes.Add(new StressBox(i));
 			}
