@@ -42,7 +42,7 @@ else
 	<InputFile id="portraitUpload" OnChange="UploadPortrait" hidden accept="image/*" />
 
 	<MudPaper Class="pa-8">
-		<MudItem Class="d-flex">
+		<MudItem Class="d-sm-flex">
 			<MudItem Class="flex-grow-1">
 				<MudTextField Label="Name" @bind-Value="character.Name" For="@(() => character.Name)" ReadOnly="!IsEditable" />
 				<MudTextField Label="Description" @bind-Value="character.Description" For="@(() => character.Description)" ReadOnly="!IsEditable" />
