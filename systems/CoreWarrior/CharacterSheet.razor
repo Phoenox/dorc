@@ -261,24 +261,33 @@ else
         	}
 
 		<MudField Label="Stress" Variant="Variant.Outlined">
-			<MudGrid>
-				<MudItem Class="my-auto" xs="3">
-					<MudText Typo="Typo.h6">🛡️ Physical Stress</MudText>
-				</MudItem>
-				<MudItem xs="9">
-					@foreach (var stressBox in @character.Mech.PhysicalStress.StressBoxes)
-					{
-						<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()"/>
-					}
-				</MudItem>
-
-				<MudItem xs="3">
-					<MudText Typo="Typo.h6">🔥 Heat Dissipation</MudText>
-				</MudItem>
-				<MudItem xs="9">
-					@character.Mech.HeatDissipation
-				</MudItem>
-			</MudGrid>
+		<MudItem Class="d-sm-flex">
+                        
+			<MudItem Class="flex-grow-1" xs="2">
+				<MudText Typo="Typo.h6">
+					<MudIcon Icon="@Icons.Material.Filled.Shield" Color="Color.Primary" />
+					Physical Stress
+				</MudText>
+			</MudItem>
+			<MudItem Class="flex-grow-1">
+				@foreach (var stressBox in @character.Mech.PhysicalStress.StressBoxes)
+				{
+					<MudCheckBox @bind-Checked="@stressBox.IsChecked" Label="@stressBox.Value.ToString()"/>
+				}
+			</MudItem>
+		</MudItem>
+			<MudItem Class="d-sm-flex">
+				<MudItem Class="flex-grow-1" xs="2">
+                	<MudText Typo="Typo.h6">
+                		<MudIcon Icon="@Icons.Material.Filled.AcUnit" Color="Color.Primary" />
+                		Heat Dissipation
+                	</MudText>
+                </MudItem>
+                <MudItem Class="flex-grow-1">
+	                <MudTextField @bind-Value="character.Mech.HeatDissipation" For="@(() => character.Mech.HeatDissipation)"
+	                              ReadOnly="!IsEditable"/>
+                </MudItem>
+			</MudItem>
 		</MudField>
 	</MudPaper>
 	
