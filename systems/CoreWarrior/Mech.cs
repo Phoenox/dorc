@@ -11,6 +11,8 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 	{
 		public string Name { get; set; } = "";
 		public string Description { get; set; } = "";
+		public string HighConcept { get; set; } = "";
+		public string Trouble { get; set; } = "";
 		private int _tonnage = 50;
 
 		public int Tonnage
@@ -26,7 +28,6 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 			set => this.SetClass(value);
 		}
 		public List<string> Aspects { get; } = new();
-		public List<Stunt> Stunts { get; } = new();
 		public List<Equipment> Equipment { get; } = new();
 		public int HeatDissipation { get; set; } = 5;
 		public StressBar PhysicalStress = new StressBar("Physical", 5);

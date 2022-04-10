@@ -16,8 +16,8 @@ namespace Dorc.RoleplayingSystems.CoreWarrior
 		{
 			if (CreateCharacter() is not Character character)
 				throw new InvalidOperationException("Character is of invalid type.");
-			character.Stats.AddDefaultSkills();
-			character.Stats.AddDefaultStress();
+			character.Core.AddDefaultSkills();
+			character.Core.AddDefaultStress();
 			return character;
 		}
 
