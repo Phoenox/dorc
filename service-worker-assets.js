@@ -53,7 +53,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-zdj5HNBqwJh3VQVM4H9M60Knz3Y2EDqQPVSVEkiGmy0=",
+      "hash": "sha256-xBcdzmA+vnOivClOKecB+jdpxRYdY6xisinhevL+apo=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -69,7 +69,7 @@
       "url": "_framework\/Characters.View.dll"
     },
     {
-      "hash": "sha256-UcQeFyxLJhWLcH68wA2RPVbxiSHDYnN+8\/RzOKKV9eM=",
+      "hash": "sha256-uik2jGoqVFQCtKno8GTBIFV4flJ6StI6W8Dmxm23YVI=",
       "url": "_framework\/CoreWarrior.dll"
     },
     {
@@ -81,7 +81,7 @@
       "url": "_framework\/Dorc.Client.dll"
     },
     {
-      "hash": "sha256-l3YrteivD5DwCAs1y+bqbkjCITLFRIzU9+3TEgmg9IY=",
+      "hash": "sha256-wL4xcd7FF8wpKEFOuqKuWOQXtNJZ6uv0Cj\/6dM2C+CY=",
       "url": "_framework\/Fate.dll"
     },
     {
@@ -405,5 +405,5 @@
       "url": "_content\/Characters.View\/Characters.View.bundle.scp.css"
     }
   ],
-  "version": "FZOCC2Oh"
+  "version": "L8LLOUd4"
 };
